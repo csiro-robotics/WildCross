@@ -1,0 +1,3 @@
+[submodule "benchmarking/cross_modal/lidar-image-pretrain-VPR"]
+	path = benchmarking/cross_modal/lidar-image-pretrain-VPR
+	url = git@github.com:Shubodh/lidar-image-pretrain-VPR.git
