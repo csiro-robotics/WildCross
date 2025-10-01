@@ -1,0 +1,29 @@
+__pycache__/
+*.py[cod]
+
+
+# Jupyter Notebook
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
+
+# Ignore everything in data folder except specific subdirectories
+data/train/*
+data/val/*
+!data/train/.gitkeep
+!data/val/.gitkeep
+*.out
+*.pickle
+*.pth
+*.ckpt 
+__pycache__/
+# Logs
+logs/
+
+# VS Code
+.vscode/
+
+# Cache files
+.cache/
+
+
+dev.ipynb
