@@ -25,17 +25,13 @@ class DinoWrapperV2(nn.Module):
     def forward(self, x):
         B, _, H, W = x.shape
         # No need to compute gradients for frozen layers
-        print(type(x), len(x))
         with torch.no_grad():
             x = self.dino.prepare_tokens_with_masks(x)
-            print(type(x), len(x))
             for blk in self.dino.blocks[ : -self.unfreeze_n_blocks]:
                 x = blk(x)
-                print(type(x), len(x))
         # Last blocks are trained
         for blk in self.dino.blocks[-self.unfreeze_n_blocks : ]:
             x = blk(x)
-            print(type(x), len(x))
 
         # Get class token
         x = x[:,0]
