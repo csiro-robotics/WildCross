@@ -27,8 +27,8 @@ class CFG:
     projection_dim = 256 
     dropout = 0.1
     crop = True
-    dataloader = "WildVPRDatasetRangeView"
-    model = "CLIPModelV1NormNewLoss"
+    dataloader = "WildCrossDatasetRangeView"
+    model = "CLIPModelV1NormWildCross"
     use_class_token = True
     
     # Cropping

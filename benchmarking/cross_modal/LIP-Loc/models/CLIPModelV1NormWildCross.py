@@ -3,7 +3,7 @@ import torch.nn.functional as F
 from torch import nn
 import torch
 
-class DinoWrapper(nn.Module):
+class DinoWrapperV2(nn.Module):
     def __init__(self, dino):
         super().__init__()
         self.dino = dino 
@@ -25,17 +25,22 @@ class DinoWrapper(nn.Module):
     def forward(self, x):
         B, _, H, W = x.shape
         # No need to compute gradients for frozen layers
+        print(type(x), len(x))
         with torch.no_grad():
             x = self.dino.prepare_tokens_with_masks(x)
+            print(type(x), len(x))
             for blk in self.dino.blocks[ : -self.unfreeze_n_blocks]:
                 x = blk(x)
+                print(type(x), len(x))
         # Last blocks are trained
         for blk in self.dino.blocks[-self.unfreeze_n_blocks : ]:
             x = blk(x)
+            print(type(x), len(x))
 
         # Get class token
         x = x[:,0]
         return x 
+
 
 class ImageEncoder(nn.Module):
     """
@@ -48,19 +53,29 @@ class ImageEncoder(nn.Module):
         super().__init__()
         if model_name == 'Dinov2':
             dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
-            self.model = DinoWrapper(dino)
+            self.model = DinoWrapperV2(dino)
             
         elif model_name == 'Dinov3':
             # Here define REPO_DIR and CHECKPOINT_PATH to your local dinov3 repo and checkpoint paths
             # See https://github.com/facebookresearch/dinov3 for more details
-            REPO_DIR="/path/to/dinov3/repo"
-            CHECKPOINT_PATH="/path/to/dinov3/checkpoint"
+            REPO_DIR="/scratch3/kni101/work/CrossModalVPR/dinov3"
+            CHECKPOINT_PATH="/scratch3/kni101/work/CrossModalVPR/dinov3/checkpoints/dinov3_vits16_pretrain_lvd1689m-08c60483.pth"
             
             dino = torch.hub.load(REPO_DIR,
                                 'dinov3_vits16',
                                 source='local',
                                 weights=CHECKPOINT_PATH)
-            self.model = DinoWrapper(dino)    
+        
+            for blk in dino.blocks:
+                for p in blk.parameters():
+                    p.requires_grad = False 
+            for blk in dino.blocks[-2:]:
+                for p in blk.parameters():
+                    p.requires_grad = True 
+        
+            self.model = dino
+        
+        
         else:
             self.model = timm.create_model(
                 model_name, pretrained, num_classes=0, global_pool="avg"
