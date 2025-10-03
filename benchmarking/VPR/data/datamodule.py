@@ -4,6 +4,13 @@ from torch.utils.data.dataloader import DataLoader
 from data.dataset import WildCrossDataset 
 from torchpack.utils.config import configs as CFG 
 from torchvision.transforms import v2  as T
+import numpy as np 
+import random 
+
+def seed_worker(worker_id):
+    worker_seed = torch.initial_seed() % 2**32
+    np.random.seed(worker_seed)
+    random.seed(worker_seed)
 
 class WildCrossDataModule(L.LightningDataModule):
     def __init__(self):
@@ -46,12 +53,16 @@ class WildCrossDataModule(L.LightningDataModule):
         
     def train_dataloader(self):
         self.setup()
+        g = torch.Generator()
+        g.manual_seed(CFG.seed)
         return DataLoader(
             self.train_dataset,
             batch_size = self.batch_size,
             num_workers = self.num_workers,
             pin_memory = True,
-            shuffle = True 
+            shuffle = True,
+            worker_init_fn = seed_worker,
+            generator=g
         )
 
 if __name__ == '__main__':

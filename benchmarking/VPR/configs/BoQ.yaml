@@ -1,5 +1,6 @@
 # TRAINING 
 split_idx: 0 # Use 0-indexing for splits: 0 = V/K-01 used as queries, etc.
+num_gpus: 1
 seed: 2024 
 
 max_epochs: 40
@@ -7,6 +8,7 @@ warmup_epochs: 10
 milestones: [10,20]
 lr: 0.0001
 lr_mul: 0.1
+weight_decay: 0.0001
 
 # DATA
 wildcross_path: /datasets/work/d61-csirorobotics2/source/WildVPR
@@ -21,3 +23,14 @@ img_per_place: 4
 batch_size: 128
 num_workers: 32
 anchor_framerate_downsample: 5
+
+# MODEL 
+model_name: BoQ 
+backbone:
+  name: dinov2_vitb14
+  unfreeze_n_blocks: 2
+  output_dim: 8192 
+aggregator:
+    channel_proj: 384 
+    num_queries: 64 
+    num_layers: 2 

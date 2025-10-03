@@ -55,7 +55,7 @@ class WildCrossInfoConstructor:
         if len(filtered_pos_images) < self.img_per_place:
             return None 
         else:
-            return {'images': filtered_pos_images, 'xyz': filtered_pos_xyz}
+            return {'images': filtered_pos_images, 'coords': filtered_pos_xyz}
         
     def construct_train_set_wildcross_environment(self, environment):
         if environment == 'venman':
@@ -135,7 +135,7 @@ class WildCrossDataset:
         self.info = self.get_info()
         
     def get_info(self):
-        info_pickle_path = os.path.join(os.path.dirname(__file__), f"train_info_pir{self.pos_include_radius}_per_{self.pos_exclude_radius}_fovr_{self.fov_include_radius}_afds_{self.anchor_framerate_downsample}_sidx_{self.split_idx}.pickle")
+        info_pickle_path = os.path.join(os.path.dirname(__file__), 'pickles', f"train_info_pir{self.pos_include_radius}_per_{self.pos_exclude_radius}_fovr_{self.fov_include_radius}_afds_{self.anchor_framerate_downsample}_sidx_{self.split_idx}.pickle")
         if os.path.exists(info_pickle_path):
             info = pickle.load(open(info_pickle_path, 'rb'))
         else:
