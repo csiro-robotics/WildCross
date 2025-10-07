@@ -28,7 +28,7 @@ class BoQModel(LightningModel):
             proj_channels = CFG.aggregator.channel_proj,
             num_queries = CFG.aggregator.num_queries,
             num_layers = CFG.aggregator.num_layers,
-            row_dim = CFG.backbone.output_dim // CFG.aggregator.channel_proj,
+            row_dim = CFG.aggregator.output_dim // CFG.aggregator.channel_proj,
         )
         
         self.backbone = backbone 

@@ -27,12 +27,12 @@ num_workers: 32
 anchor_framerate_downsample: 5
 
 # MODEL 
-model_name: BoQ 
+model_name: SALAD 
 backbone:
   name: dinov2_vitb14
   unfreeze_n_blocks: 2
 aggregator:
-    channel_proj: 384 
-    num_queries: 64 
-    num_layers: 2 
-    output_dim: 12288 
+    num_channels: 768
+    num_clusters: 64
+    cluster_dim: 128
+    token_dim: 256

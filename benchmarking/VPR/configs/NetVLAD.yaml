@@ -18,8 +18,8 @@ pos_include_radius: 5.0
 pos_exclude_radius: 0.5
 fov_include_radius: 10.0
 
-train_img_size: [224, 224]
-val_img_size: [322, 322]
+train_img_size: [320, 320]
+val_img_size: [320, 320]
 
 img_per_place: 4
 batch_size: 128
@@ -27,12 +27,5 @@ num_workers: 32
 anchor_framerate_downsample: 5
 
 # MODEL 
-model_name: BoQ 
-backbone:
-  name: dinov2_vitb14
-  unfreeze_n_blocks: 2
-aggregator:
-    channel_proj: 384 
-    num_queries: 64 
-    num_layers: 2 
-    output_dim: 12288 
+model_name: NetVLAD
+descriptor_dimension: 4096

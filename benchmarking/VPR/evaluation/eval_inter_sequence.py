@@ -102,6 +102,7 @@ if __name__ == '__main__':
     print(CFG)
     
     model = model_factory(args).cuda()
+    model.eval()
     
     venman_eval_info_filepath = os.path.join(os.path.dirname(__file__), 'pickles', 'venman_eval_info.pickle')
     karawatha_eval_info_filepath = os.path.join(os.path.dirname(__file__), 'pickles', 'karawatha_eval_info.pickle')

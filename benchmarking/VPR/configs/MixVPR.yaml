@@ -18,8 +18,8 @@ pos_include_radius: 5.0
 pos_exclude_radius: 0.5
 fov_include_radius: 10.0
 
-train_img_size: [224, 224]
-val_img_size: [322, 322]
+train_img_size: [320, 320]
+val_img_size: [320, 320]
 
 img_per_place: 4
 batch_size: 128
@@ -27,12 +27,16 @@ num_workers: 32
 anchor_framerate_downsample: 5
 
 # MODEL 
-model_name: BoQ 
+model_name: MixVPR
 backbone:
-  name: dinov2_vitb14
-  unfreeze_n_blocks: 2
+  name: resnet50 
+  layers_to_freeze: 2
+  layers_to_crop: [4]
 aggregator:
-    channel_proj: 384 
-    num_queries: 64 
-    num_layers: 2 
-    output_dim: 12288 
+    in_channels: 1024
+    out_channels: 1024 
+    in_h: 20 
+    in_w: 20 
+    mix_depth: 1 
+    mlp_ratio: 1 
+    out_rows: 1

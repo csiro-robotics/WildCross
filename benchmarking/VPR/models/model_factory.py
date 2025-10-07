@@ -1,11 +1,19 @@
 import torch 
 from models.BoQ.model import BoQModel
+from models.MixVPR.model import MixVPRModel
+from models.SALAD.model import SALADModel
+from models.NetVLAD.model import NetVladModel
 from torchpack.utils.config import configs as CFG 
 
 def model_factory(args):
     if CFG.model_name == 'BoQ':
         model = BoQModel()
-        
+    elif CFG.model_name == 'MixVPR':
+        model = MixVPRModel()
+    elif CFG.model_name == 'SALAD':
+        model = SALADModel()
+    elif CFG.model_name == 'NetVLAD':
+        model = NetVladModel()
     else:
         raise NotImplementedError(f"No method {CFG.model_name} implemented")
     
