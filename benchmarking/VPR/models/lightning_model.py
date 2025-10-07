@@ -6,7 +6,7 @@ import lightning as L
 from torchmetrics.aggregation import RunningMean
 from torchpack.utils.config import configs as CFG 
 
-from models.miner import WildCrossMultiSimilarityMiner, WildVPRHardTripletMiner
+from models.miner import WildCrossMultiSimilarityMiner, WildCrossHardTripletMiner
 
 class LightningModel(L.LightningModule):
     def __init__(self):
@@ -20,8 +20,10 @@ class LightningModel(L.LightningModule):
         self.warmup_epochs = CFG.warmup_epochs 
         self.milestones = CFG.milestones 
         
+        # Init loggers 
         self.running_mean_loss = RunningMean(window=500)
         self.running_mean_batch_acc = RunningMean(window=500)
+        
         # Init loss function and miner 
         if CFG.loss == 'multi_similarity_loss':
             self.loss = losses.MultiSimilarityLoss(alpha=1, beta=50, base=0.)
@@ -31,7 +33,7 @@ class LightningModel(L.LightningModule):
             reducer_fn = reducers.AvgNonZeroReducer(collect_stats=True)
             self.loss = losses.TripletMarginLoss(margin=0.2, swap=True, distance=distance,
                                                 reducer=reducer_fn, collect_stats=True)
-            self.miner = WildVPRHardTripletMiner(margin=0.2)
+            self.miner = WildCrossHardTripletMiner(margin=0.2)
         
     def configure_optimizers(self):
         optimizer_params = [
@@ -76,13 +78,13 @@ class LightningModel(L.LightningModule):
         return x 
     
     def training_step(self, batch, batch_idx):
-        image, labels, positions = batch 
+        images, labels, positions = batch 
         images = images.flatten(0, 1)
         labels = labels.flatten()
         positions = positions.flatten(0, 1)
         
         # Forward pass 
-        descriptors = self.forward(images)
+        descriptors = self(images)
         loss, batch_acc = self.compute_loss(descriptors, labels, positions)
         self.running_mean_loss.update(loss.item())
         self.running_mean_batch_acc.update(batch_acc)

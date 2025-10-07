@@ -90,12 +90,12 @@ class WildCrossInfoConstructor:
         # Construct training set 
         anchor_idx = list(range(len(filepaths)))[::self.anchor_framerate_downsample]
         tree = KDTree(np.array(positions))
-        info = {}
+        info = []
         for aidx in tqdm(anchor_idx, desc = "Getting positives for each training idx"):
             info_idx = self.get_positives_for_anchor(aidx, tree, filepaths, positions, unit_vectors)
             if info_idx is not None:
                 # print(type(info))
-                info[len(info)] = info_idx
+                info.append(info_idx)
         print(f"Total of {len(info)} Training Samples available ({len(anchor_idx) - len(info)} Excluded due to not having enough potential positives)")
         return info 
         
@@ -103,11 +103,10 @@ class WildCrossInfoConstructor:
         info_venman = self.construct_train_set_wildcross_environment('venman')
         info_karawatha = self.construct_train_set_wildcross_environment('karawatha')
         
-        info_karawatha = {k+len(info_venman):v for k,v in info_karawatha.items()}
-        info_combined = {**info_venman, **info_karawatha}
+        info_combined = info_venman + info_karawatha
         
         print(f"Total of {len(info_combined)} Training Samples ")
-        print(f"Average of {np.mean([len(x['images']) for x in info_combined.values()])} positives per training sample")
+        print(f"Average of {np.mean([len(x['images']) for x in info_combined])} positives per training sample")
         return info_combined
 
 class WildCrossDataset:

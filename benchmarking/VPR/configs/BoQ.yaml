@@ -9,15 +9,17 @@ milestones: [10,20]
 lr: 0.0001
 lr_mul: 0.1
 weight_decay: 0.0001
+loss: multi_similarity_loss
 
 # DATA
 wildcross_path: /datasets/work/d61-csirorobotics2/source/WildVPR
 data_folder: images_shrunk
 pos_include_radius: 5.0
-pos_exclude_radius: 0.0
+pos_exclude_radius: 0.5
 fov_include_radius: 10.0
 
 train_img_size: [224, 224]
+val_img_size: [322, 322]
 
 img_per_place: 4
 batch_size: 128
@@ -29,7 +31,7 @@ model_name: BoQ
 backbone:
   name: dinov2_vitb14
   unfreeze_n_blocks: 2
-  output_dim: 8192 
+  output_dim: 12288 
 aggregator:
     channel_proj: 384 
     num_queries: 64 

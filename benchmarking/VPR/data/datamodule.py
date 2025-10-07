@@ -36,7 +36,7 @@ class WildCrossDataModule(L.LightningDataModule):
             T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
         
-    def setup(self):
+    def setup(self, stage=None):
         print(self.wildcross_path)
         self.train_dataset = WildCrossDataset(
             data_root = self.wildcross_path,

@@ -2,7 +2,7 @@ import torch
 from pytorch_metric_learning import miners
 from pytorch_metric_learning.utils import common_functions as c_f
 
-class WildVPRMultiSimilarityMiner(miners.MultiSimilarityMiner):
+class WildCrossMultiSimilarityMiner(miners.MultiSimilarityMiner):
     def __init__(self, epsilon=0.1, **kwargs):
         super().__init__(epsilon, **kwargs)
         self.negative_thresh = 50.0
@@ -93,7 +93,7 @@ def get_min_per_row(mat, mask):
     mat_masked[~mask] = float('inf')
     return torch.min(mat_masked, dim=1), non_inf_rows
 
-class WildVPRHardTripletMiner:
+class WildCrossHardTripletMiner:
     def __init__(self, margin=0.2):
         self.margin = margin 
         self.negative_thresh = 50.0

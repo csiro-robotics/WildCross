@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn 
 
 from .backbones import DinoV2, ResNet 
-from .boq import BoQ
+from .aggregator import BoQ
 from models.lightning_model import LightningModel
 
 from torchpack.utils.config import configs as CFG 
