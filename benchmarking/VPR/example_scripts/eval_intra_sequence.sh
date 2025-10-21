@@ -1,0 +1,12 @@
+source ~/.bashrc
+mamba activate WildCrossVPR
+
+cd /datasets/work/d61-csirorobotics2/work/kni101/WildCross/benchmarking/VPR
+export PYTHONPATH=$PWD:$PYTHONPATH
+
+export WANDB_MODE=offline
+
+python evaluation/eval_intra_sequence.py \
+    --config configs/MixVPR.yaml \
+    --save_dir /scratch3/kni101/test_output \
+    --pretrained_ckpt checkpoints/MixVPR/split_0.pth

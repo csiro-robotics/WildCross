@@ -1,0 +1,38 @@
+# TRAINING 
+split_idx: 0 # Use 0-indexing for splits: 0 = V/K-01 used as queries, etc.
+num_gpus: 1
+seed: 2024 
+
+max_epochs: 40
+warmup_epochs: 10
+milestones: [10,20]
+lr: 0.0001
+lr_mul: 0.1
+weight_decay: 0.0001
+loss: multi_similarity_loss
+
+# DATA
+wildcross_path: /datasets/work/d61-csirorobotics2/source/WildVPR
+data_folder: images_shrunk
+pos_include_radius: 5.0
+pos_exclude_radius: 0.5
+fov_include_radius: 10.0
+
+train_img_size: [224, 224]
+val_img_size: [322, 322]
+
+img_per_place: 4
+batch_size: 128
+num_workers: 32
+anchor_framerate_downsample: 5
+
+# MODEL 
+model_name: SALAD 
+backbone:
+  name: dinov2_vitb14
+  unfreeze_n_blocks: 2
+aggregator:
+    num_channels: 768
+    num_clusters: 64
+    cluster_dim: 128
+    token_dim: 256
