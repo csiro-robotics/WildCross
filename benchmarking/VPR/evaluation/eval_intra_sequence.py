@@ -79,7 +79,7 @@ class Evaluator:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', type=str, required=True)
-    parser.add_argument('--pretrained_ckpt', type=str, required=True)
+    parser.add_argument('--pretrained_ckpt', type=str, required=False)
     parser.add_argument('--environments', type=str, nargs='+', default=['venman', 'karawatha'], choices=['venman','karawatha'])
     parser.add_argument('--save_dir', type=str, default=None)
     parser.add_argument('--debug', action='store_true', default=False)

@@ -23,9 +23,10 @@ def model_factory(args):
         if "state_dict" in ckpt.keys():
             ckpt = ckpt["state_dict"]
         if CFG.model_name == 'SALAD':
-            ckpt = {k.replace('model.', ''):v for k,v in ckpt.items()}
             if "backbone.model.pos_emb" in ckpt.keys():
                 ckpt["backbone.model.pos_embed"] = ckpt.pop("backbone.model.pos_emb")
+        if CFG.model_name == 'NetVLAD':
+            ckpt = {k.replace('model.', 'backbone.'):v for k,v in ckpt.items()}
         model.load_state_dict(ckpt)
         print(f"Loaded pretrained model from {args.pretrained_ckpt}")
         

@@ -37,6 +37,6 @@ aggregator:
     out_channels: 1024 
     in_h: 20 
     in_w: 20 
-    mix_depth: 1 
+    mix_depth: 4 
     mlp_ratio: 1 
-    out_rows: 1
+    out_rows: 4

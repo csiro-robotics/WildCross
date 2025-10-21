@@ -11,15 +11,6 @@ import torch.nn.functional as F
 import torchvision.models as models
 from scipy.io import loadmat
 
-import lightning as L
-from pytorch_metric_learning import losses, miners, reducers
-from src.wildvpr_utils import WildVPRMultiSimilarityMiner, WildVPRHardTripletMiner
-from torchmetrics.aggregation import RunningMean
-from pytorch_metric_learning.distances import LpDistance
-
-from src import utils
-
-
 EPS = 1e-6
 
 IMG_MEAN = [0.485, 0.456, 0.406]

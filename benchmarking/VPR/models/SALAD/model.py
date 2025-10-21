@@ -15,7 +15,8 @@ class SALADModel(LightningModel):
         if "dinov2" in CFG.backbone.name:
             backbone = DINOv2(model_name=CFG.backbone.name, 
                               num_trainable_blocks=CFG.backbone.unfreeze_n_blocks,
-                              norm_layer=True)
+                              norm_layer=True,
+                              return_token=True)
         elif "resnet" in CFG.backbone.name:
             backbone = ResNet(model_name=CFG.backbone.name, 
                               pretrained = True, 
