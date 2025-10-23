@@ -9,11 +9,11 @@ import faiss
 from tqdm import tqdm 
 
 class Evaluator:
-    def __init__(self, model, CFG, environment, query_idx, debug):
+    def __init__(self, model, CFG, environment, split_idx, debug):
         self.model = model 
         self.CFG = CFG 
         self.environment = environment 
-        self.query_idx = query_idx
+        self.split_idx = split_idx
         self.debug = debug 
         self.recall_values = [1,5]
         self.pos_thresh = 25.0
@@ -73,7 +73,7 @@ class Evaluator:
         
     def run(self):
         query_info, db_info_list = get_image_lidar_features(
-            self.model, self.CFG, self.environment, self.query_idx, self.debug)
+            self.model, self.CFG, self.environment, self.split_idx, self.debug)
 
         df_results = pd.DataFrame(columns=["R@1", "R@5"])
         vis_recall_results = {}
@@ -83,6 +83,7 @@ class Evaluator:
             vis_recall_results[db_info['name']] = vis_recall_info
         df_results.loc['Average'] = df_results.mean(0)
         print(df_results.round(2))
+        return df_results
         
 
 if __name__ == '__main__':
@@ -90,18 +91,25 @@ if __name__ == '__main__':
     parser.add_argument('--expid', type=str, required=True)
     parser.add_argument('--ckpt', type=str, required=True)
     parser.add_argument('--environments', type=str, default=['venman','karawatha'], nargs='+')
-    parser.add_argument('--query_idx', type=int, required=True)
+    parser.add_argument('--split_idx', type=int, required=True)
+    parser.add_argument('--save_dir', type=str, default=None)
     parser.add_argument('--debug', action='store_true', default=False)
     args = parser.parse_args()
     
     CFG = importlib.import_module(f"config.{args.expid}").CFG
     model = importlib.import_module(f"models.{CFG.model}").Model(CFG)
     ckpt = torch.load(args.ckpt)
+    ckpt = {k:v for k,v in ckpt.items() if "pooling" not in k}
     model.load_state_dict(ckpt)
     model = model.to('cuda')
     model.eval()
     print(f"Loaded pretrained model from {args.ckpt}")
     
     for env in args.environments:
-        evaluator = Evaluator(model, CFG, env, args.query_idx, args.debug )
-        evaluator.run()
+        evaluator = Evaluator(model, CFG, env, args.split_idx, args.debug )
+        df_results = evaluator.run()
+        
+        if args.save_dir is not None:
+            save_path = os.path.join(args.save_dir, f"crossmodal_results_{env}_split_{args.split_idx}.csv")
+            df_results.to_csv(save_path)
+    
