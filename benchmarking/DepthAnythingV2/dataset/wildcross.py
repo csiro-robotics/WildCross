@@ -90,6 +90,21 @@ class WildCross(Dataset):
         sample['image_path'] = rgb_path
         if self.return_raw_image:
             sample['raw_image'] = cv2.cvtColor(cv2.imread(rgb_path), cv2.COLOR_BGR2RGB)
-            sample['raw_depth'] = self.read_depth_file(depth_path.replace('depth_shrunk', 'depth')) / 1000.0 # Convert from mm to m
-                
+            sample['raw_depth'] = self.read_depth_file(depth_path) / 1000.0 # Convert from mm to m
+                    
         return sample 
+
+if __name__ == '__main__':
+    from torch.utils.data import DataLoader
+    from tqdm import tqdm 
+    dataset = WildCross('/datasets/work/d61-csirorobotics2/source/WildCross_release', 'eval')
+    dataset.rgb_filelist = dataset.rgb_filelist[18000:]
+    dataset.depth_filelist = dataset.depth_filelist[18000:]
+    loader = DataLoader(
+        dataset,
+        batch_size=1,
+        pin_memory=True,
+        shuffle=False,
+        num_workers=16)
+    for _ in tqdm(loader):
+        pass 

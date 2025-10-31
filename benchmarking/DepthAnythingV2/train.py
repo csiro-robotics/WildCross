@@ -140,7 +140,7 @@ def main():
         for i, sample in enumerate(trainloader):
             optimizer.zero_grad()
             
-            img, depth, valid_mask = sample['image'].cuda(), sample['depth'].cuda(), sample['valid_mask'].cuda()
+            img, depth, valid_mask = sample['image'].cuda(local_rank), sample['depth'].cuda(local_rank), sample['valid_mask'].cuda(local_rank)
             
             if random.random() < 0.5:
                 img = img.flip(-1)
@@ -173,14 +173,14 @@ def main():
         
         model.eval()
         
-        results = {'d1': torch.tensor([0.0]).cuda(), 'd2': torch.tensor([0.0]).cuda(), 'd3': torch.tensor([0.0]).cuda(), 
-                   'abs_rel': torch.tensor([0.0]).cuda(), 'sq_rel': torch.tensor([0.0]).cuda(), 'rmse': torch.tensor([0.0]).cuda(), 
-                   'rmse_log': torch.tensor([0.0]).cuda(), 'log10': torch.tensor([0.0]).cuda(), 'silog': torch.tensor([0.0]).cuda()}
-        nsamples = torch.tensor([0.0]).cuda()
+        results = {'d1': torch.tensor([0.0]).cuda(local_rank), 'd2': torch.tensor([0.0]).cuda(local_rank), 'd3': torch.tensor([0.0]).cuda(local_rank), 
+                   'abs_rel': torch.tensor([0.0]).cuda(local_rank), 'sq_rel': torch.tensor([0.0]).cuda(local_rank), 'rmse': torch.tensor([0.0]).cuda(local_rank), 
+                   'rmse_log': torch.tensor([0.0]).cuda(local_rank), 'log10': torch.tensor([0.0]).cuda(local_rank), 'silog': torch.tensor([0.0]).cuda(local_rank)}
+        nsamples = torch.tensor([0.0]).cuda(local_rank)
         
         for i, sample in enumerate(valloader):
             
-            img, depth, valid_mask = sample['image'].cuda().float(), sample['depth'].cuda()[0], sample['valid_mask'].cuda()[0]
+            img, depth, valid_mask = sample['image'].cuda(local_rank).float(), sample['depth'].cuda(local_rank)[0], sample['valid_mask'].cuda(local_rank)[0]
             
             with torch.no_grad():
                 pred = model(img)
