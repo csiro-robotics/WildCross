@@ -34,10 +34,10 @@ Instructions on how to load each of the data modalities (RGB Image, Depth Image,
 We provide code for training and evaluation on the **WildCross** dataset for the tasks of [visual place recognition (VPR)](benchmarking/VPR/), [cross-modal place recognition (CMPR)](/benchmarking/cross_modal/) and [metric depth estimation](benchmarking/DepthAnythingV2/), which can be found in their respectives subfolders inside the `benchmarking` folder.  For more detailed instructions for setting up and running these benchmarks, consult the documentation inside the respective subfolders for each task.
 
 ### Checkpoints
-We provide checkpoints for the fine-tuned models used to produce the results in this publication, as well as the urban pre-trained models provided by the original authors for each of the benchmarked methods where applicable.
+We provide checkpoints for the fine-tuned models used to produce the results in this publication, as well as the urban pre-trained models provided by the original authors for each of the benchmarked methods where applicable.  See the sub-folder for each benchmarked task to find the respective download links to the relevant checkpoints for that task.
 
 
-#### Visual Place Recognition 
+<!-- #### Visual Place Recognition 
 | Method | Checkpoints |
 |:-|:-:|
 |NetVlad|[Download]()|
@@ -57,8 +57,24 @@ We provide checkpoints for the fine-tuned models used to produce the results in 
 |:-|:-|:-:|
 |DepthAnythingV2|DinoV2-vits|[Download]()|
 |DepthAnythingV2|DinoV2-vitb|[Download]()|
-|DepthAnythingV2|DinoV2-vitl|[Download]()|
+|DepthAnythingV2|DinoV2-vitl|[Download]()| -->
 
+## Acknowledgements
+We are grateful to the authors and open source maintainers for NetVlad, [MixVPR](https://github.com/amaralibey/MixVPR), [SALAD](https://github.com/serizba/salad), [BOQ](https://github.com/amaralibey/Bag-of-Queries), [LIP-Loc](https://github.com/Shubodh/lidar-image-pretrain-VPR) and [DepthAnythingV2](https://github.com/DepthAnything/Depth-Anything-V2), whose implementations form the basis of the training and evaluation code presented in this repository.  We would also like to thank the author of the [VPR-methods-evaluation](https://github.com/gmberton/VPR-methods-evaluation) repository, which provided an excellent starting point for the development of the evaluation scripts in this repository.  
+
+## Citation
+If you find this repository useful or use the WildCross dataset in your work, please cite us using the following:
+```
+@misc{knights2025wildcross,
+  title={{WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments}},
+  author={Joshua Knights, Joseph Reid, Mark Cox, Kaushik Roy, David Hall, Peyman Moghadam},
+  year={2025},
+  eprint={xxxxxxxxx},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/xxxxxxxxxx},
+}
+```
 
 <!-- 
 ## Pre-trained Models
