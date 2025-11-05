@@ -24,7 +24,7 @@ mamba install -f environment.yaml
 ### Checkpoints
 We provide download links for both the author-provided pre-trained checkpoints on urban environments and our fine-tuned checkpoints for each method:
 
-| Method | Checkpoint | Link |
+| Method | Split | Link |
 |:-|:-|:-:|
 |NetVlad|Pre-Trained|[Download]()|
 ||Split 1|[Download]()|
@@ -55,15 +55,16 @@ python train.py \
     --config /path/to/method/configs.yaml \
     --save_dir /path/to/save/dir \
     --pretrained_ckpt /path/to/checkpoint.pth \
-    --split_idx 
+    split_idx 0
 ```
 
 Where:
 - `--config` is for providing the config file for a given method, which can be found in `./configs`
 - `--savedir` is for providing the directory to save checkpoints and logs in
 - `--pretrained_ckpt` is for providing a path to a pre-trained checkpoint to load before starting training.  For best performance, we recommend using the urban pre-trained checkpoints provided here.
+- `split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: In this codebase, the crossfold dataset splits are 0-indexed (*e.g.* split 0, 1, 2, 3) - keep this in mind when selecting splits for training and testing.
 
-It is also possible to modify arguments in the config file through the command line by passing the name of the argument and its value as a pair of inputs at the end of the command, (*e.g.* `max_epochs 20` to modify the maximum number of training epochs)
+It is also possible to modify arguments in the config file through the command line by passing the name of the argument and its value as a pair of inputs at the end of the command, (*e.g.* `max_epochs 20` to modify the maximum number of training epochs) 
 
 
 
@@ -72,5 +73,21 @@ For evaluating a trained model, run `eval_inter_sequence.py` or `eval_intra_sequ
 
 ```
 export PYTHONPATH=$PWD:$PYTHONPATH
+python evaluation/eval_inter_sequence.py \
+    --config /path/to/method/configs.yaml \
+    --save_dir /path/to/save/dir \
+    --pretrained_ckpt  /path/to/checkpoint.pth \
+    split_idx 0 
+```
 
 ```
+export PYTHONPATH=$PWD:$PYTHONPATH
+python evaluation/eval_intra_sequence.py \
+    --config /path/to/method/configs.yaml \
+    --save_dir /path/to/save/dir \
+    --pretrained_ckpt  /path/to/checkpoint.pth \
+    split_idx 0 
+```
+
+## Acknowledgements
+We would once again like to thank the authors and open source maintainers for NetVlad, [MixVPR](https://github.com/amaralibey/MixVPR), [SALAD](https://github.com/serizba/salad), [BOQ](https://github.com/amaralibey/Bag-of-Queries) and [VPR-methods-evaluation](https://github.com/gmberton/VPR-methods-evaluation), which were invaluable for the benchmarking experiments and code used in this paper and repository.

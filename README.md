@@ -36,29 +36,6 @@ We provide code for training and evaluation on the **WildCross** dataset for the
 ### Checkpoints
 We provide checkpoints for the fine-tuned models used to produce the results in this publication, as well as the urban pre-trained models provided by the original authors for each of the benchmarked methods where applicable.  See the sub-folder for each benchmarked task to find the respective download links to the relevant checkpoints for that task.
 
-
-<!-- #### Visual Place Recognition 
-| Method | Checkpoints |
-|:-|:-:|
-|NetVlad|[Download]()|
-|MixVPR|[Download]()|
-|SALAD|[Download]()|
-|BoQ|[Download]()| 
-
-#### Cross-Modal Place Recognition 
-| Method | Backbone | Checkpoints |
-|:-|:-|:-:|
-|LIP-Loc|ResNet50|[Download]()|
-|LIP-Loc|DinoV2|[Download]()|
-|LIP-Loc|DinoV3|[Download]()|
-
-#### Metric Depth Estimation
-| Method | Backbone | Checkpoints |
-|:-|:-|:-:|
-|DepthAnythingV2|DinoV2-vits|[Download]()|
-|DepthAnythingV2|DinoV2-vitb|[Download]()|
-|DepthAnythingV2|DinoV2-vitl|[Download]()| -->
-
 ## Acknowledgements
 We are grateful to the authors and open source maintainers for NetVlad, [MixVPR](https://github.com/amaralibey/MixVPR), [SALAD](https://github.com/serizba/salad), [BOQ](https://github.com/amaralibey/Bag-of-Queries), [LIP-Loc](https://github.com/Shubodh/lidar-image-pretrain-VPR) and [DepthAnythingV2](https://github.com/DepthAnything/Depth-Anything-V2), whose implementations form the basis of the training and evaluation code presented in this repository.  We would also like to thank the author of the [VPR-methods-evaluation](https://github.com/gmberton/VPR-methods-evaluation) repository, which provided an excellent starting point for the development of the evaluation scripts in this repository.  
 

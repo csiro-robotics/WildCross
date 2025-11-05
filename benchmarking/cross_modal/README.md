@@ -1,14 +1,71 @@
-# Cross-Modal Benchmarking
+# Cross-Modal Benchmarking and Evaluation
 
-In this folder we provide code for training the baseline cross-modal place recognition approach *LIP-Loc: LiDAR Image Pretraining for Cross-Modal Localization*. 
+This subfolder contains scripts for training and evaluation for the task of Cross-Modal Place Recognition for **WildCross**.  We provide support for the baseline cross-modal approach LIP-Loc, using the ResNet50, DinoV2 and DinoV3 backbones.  
 
-## Setting up the environment
-We use the package management tool **mamba** for constructing python virtual environments to run our experiments in.  We provide an `environment.yaml` file which can be used to construct the virtual environment for these experiments using the following command:
+## Setup
+
+### Dataset 
+To download the **WildCross** Dataset, follow the instructions in the root directory of this repository.  By default this repository will use the full resolution point clouds (`Clouds`) and the pre-shrunk images (*i.e.* images in the `images_shrunk` folder) to optimise the speed at which the raw data is loaded from the disk, but this can be changed by editing `./dataloaders/WildCrossDatasetRangeView.py`.
+
+### Environment
+We provide an environment file to set up the necessary python environment for training and evaluation using **mamba**.  The environment can be installed by running the following command out of this directory:
+
 ```
-mamba env create -f environment.yaml
+mamba install -f environment.yaml
 ```
-## Config files
-Config files for different network architectures (*e.g.* ResNet50, DinoV2, DinoV3) can be found in the `LIP-Loc/configs` directory.  For training on WildCross, the three config files for the above network architectures respectively are `exp_wildvpr_range_res50.py`, `exp_wildvpr_range_dinov2.py` and `exp_wildvpr_range_dinov3.py`.  Before training, first change the value of  `data_path` in the relevant config file to point towards the root directory of the *WildCross* dataset on your machine.
-### DinoV3
-In order to train DinoV3, first follow the instructions on [The official DinoV3 repository](https://github.com/facebookresearch/dinov3) to clone the repository to your local machine and download the pre-trained weights.  Then, add the paths to the repository and pretrained weights where indicated in `LIP-Loc/models/CLIPModelV1NormWildCross.py` in order to train with this model architecture.
 
+### Checkpoints 
+We provide download links for our fine-tuned checkpoints for each network backbone:
+
+| Backbone | Split | Link |
+|:-|:-|:-:|
+|ResNet50|Split 1|[Download]()|
+||Split 2|[Download]()|
+||Split 3|[Download]()|
+||Split 4|[Download]()|
+|DinoV2|Split 1|[Download]()|
+||Split 2|[Download]()|
+||Split 3|[Download]()|
+||Split 4|[Download]()|
+|DinoV3|Split 1|[Download]()|
+||Split 2|[Download]()|
+||Split 3|[Download]()|
+||Split 4|[Download]()|
+
+## Training
+To train a given backbone and split on the WildCross Dataset, run `trainer_wildcross.py` as follows:
+
+```
+export PYTHONPATH=$PWD:$PYTHONPATH 
+python train.py \
+    --expid $EXPID \
+    --save_dir /path/to/save_dir.py \
+    --split_idx $SPLIT_IDX
+```
+
+Where:
+- `--expid` is for the name of the config file for this experiment.  Available config files can be found in `configs`, with the relevant examples for training on WildCross being:
+    - `exp_wildcross_range_resnet50`: Training with ResNet50 
+    - `exp_wildcross_range_dinov2`: Training with DinoV2 
+    - `exp_wildcross_range_dinov3`: Training with DinoV3 
+- `--save_dir` is for the directory which the training logs and checkpoints will be saved to
+- `--split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: In this codebase, the crossfold dataset splits are 0-indexed (*e.g.* split 0, 1, 2, 3) - keep this in mind when selecting splits for training and testing.
+
+## Evaluation
+To evaluate a given checkpoint, run `evaluate_wildcross/evaluate.py` as follows:
+
+```
+export PYTHONPATH=$PWD:$PYTHONPATH
+python evaluate_wildcross/evaluate.py \
+    --expid $EXPID \
+    --save_dir /path/to/save_dir.py \
+    --split_idx $SPLIT_IDX
+    --ckpt /path/to/checkpoint.pth \
+```
+
+Where:
+- `--expid`, `--save_dir` and `--split_idx` are the same as for the training script
+- `--ckpt` is for setting the path to the checkpoint to be evaluated 
+
+## Acknowledgements
+We would like again to acknowledge the authors of the original LIP-Loc paper and the maintainers of the open source repository hosted at `https://github.com/Shubodh/lidar-image-pretrain-VPR` which is used as the basis for the code in this repository

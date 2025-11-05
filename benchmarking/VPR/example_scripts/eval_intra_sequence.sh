@@ -9,4 +9,5 @@ export WANDB_MODE=offline
 python evaluation/eval_intra_sequence.py \
     --config configs/MixVPR.yaml \
     --save_dir /scratch3/kni101/test_output \
-    --pretrained_ckpt checkpoints/MixVPR/split_0.pth
+    --pretrained_ckpt checkpoints/MixVPR/split_0.pth \
+    split_idx 0 
