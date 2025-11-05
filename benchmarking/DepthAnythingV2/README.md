@@ -1,114 +1,67 @@
-# Depth Anything V2 for Metric Depth Estimation
+# Metric Depth Estimation Benchmarking and Evaluation
 
-![teaser](./assets/compare_zoedepth.png)
+This subfolder contains scripts for training and evaluation for the task of Metric Depth Estimation for **WildCross**, using DepthAnythingV2.
 
-We here provide a simple codebase to fine-tune our Depth Anything V2 pre-trained encoder for metric depth estimation. Built on our powerful encoder, we use a simple DPT head to regress the depth. We fine-tune our pre-trained encoder on synthetic Hypersim / Virtual KITTI datasets for indoor / outdoor metric depth estimation, respectively.
+## Setup
 
+### Dataset 
+To download the **WildCross** Dataset, follow the instructions in the root directory of this repository.  By default this repository will use the full sized images (`images`) and point clouds (`depth`) for training and evaluation.
 
-# Pre-trained Models
+### Environment
+We provide an environment file to set up the necessary python environment for training and evaluation using **mamba**.  The environment can be installed by running the following command out of this directory:
 
-We provide **six metric depth models** of three scales for indoor and outdoor scenes, respectively.
-
-| Base Model | Params | Indoor (Hypersim) | Outdoor (Virtual KITTI 2) |
-|:-|-:|:-:|:-:|
-| Depth-Anything-V2-Small | 24.8M | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-Hypersim-Small/resolve/main/depth_anything_v2_metric_hypersim_vits.pth?download=true) | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-VKITTI-Small/resolve/main/depth_anything_v2_metric_vkitti_vits.pth?download=true) |
-| Depth-Anything-V2-Base | 97.5M | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-Hypersim-Base/resolve/main/depth_anything_v2_metric_hypersim_vitb.pth?download=true) | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-VKITTI-Base/resolve/main/depth_anything_v2_metric_vkitti_vitb.pth?download=true) |
-| Depth-Anything-V2-Large | 335.3M | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-Hypersim-Large/resolve/main/depth_anything_v2_metric_hypersim_vitl.pth?download=true) | [Download](https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-VKITTI-Large/resolve/main/depth_anything_v2_metric_vkitti_vitl.pth?download=true) |
-
-*We recommend to first try our larger models (if computational cost is affordable) and the indoor version.*
-
-## Usage
-
-### Prepraration
-
-```bash
-git clone https://github.com/DepthAnything/Depth-Anything-V2
-cd Depth-Anything-V2/metric_depth
-pip install -r requirements.txt
+```
+mamba install -f environment.yaml
 ```
 
-Download the checkpoints listed [here](#pre-trained-models) and put them under the `checkpoints` directory.
+### Checkpoints 
+We provide download links for both the KITTI pre-trained and WildCross fine-tuned checkpoints for each network backbone:
 
-### Use our models
-```python
-import cv2
-import torch
+| Backbone | Checkpoint | Link |
+|:-|:-|:-:|
+|ViT-s|Pre-trained|[Download]()|
+||Fine-tuned|[Download]()|
+|ViT-b|Pre-trained|[Download]()|
+||Fine-tuned|[Download]()|
+|ViT-l|Pre-trained|[Download]()|
+||Fine-tuned|[Download]()|
 
-from depth_anything_v2.dpt import DepthAnythingV2
+## Training
+To train on the WildCross dataset, firstly edit the value of the `wildcross_root` variable on line 74 of `train.py` to the directory containing the WildCross dataset on your machine.  Then, you can train the network by running `train.py` as follows:
 
-model_configs = {
-    'vits': {'encoder': 'vits', 'features': 64, 'out_channels': [48, 96, 192, 384]},
-    'vitb': {'encoder': 'vitb', 'features': 128, 'out_channels': [96, 192, 384, 768]},
-    'vitl': {'encoder': 'vitl', 'features': 256, 'out_channels': [256, 512, 1024, 1024]}
-}
+```
+export PYTHONPATH=$PWD:$PYTHONPATH 
+GPUS=$NUM_GPUS
 
-encoder = 'vitl' # or 'vits', 'vitb'
-dataset = 'hypersim' # 'hypersim' for indoor model, 'vkitti' for outdoor model
-max_depth = 20 # 20 for indoor model, 80 for outdoor model
-
-model = DepthAnythingV2(**{**model_configs[encoder], 'max_depth': max_depth})
-model.load_state_dict(torch.load(f'checkpoints/depth_anything_v2_metric_{dataset}_{encoder}.pth', map_location='cpu'))
-model.eval()
-
-raw_img = cv2.imread('your/image/path')
-depth = model.infer_image(raw_img) # HxW depth map in meters in numpy
+python3 -m torch.distributed.launch \
+    --nproc_per_node=$GPUS \
+    --nnodes 1 \
+    --node_rank=0 \
+    --master_addr=localhost \
+    --master_port=20596 \
+    train.py \
+        --encoder $ENCODER \
+        --save-path /path/to/save/directory \
+        --pretrained-from /path/to/pretrained/checkpoint \
 ```
 
-### Running script on images
+Where:
+- `GPUS` refers to the number of GPUS to be used for training
+- `--encoder` refers to the backbone encoder to be used.  We recommend using `vits`, `vitb` or `vitl` for small, base or large Visual Transformers respectively.
+- `--save-path` refers to the directory to save training logs and checkpoints in 
+- `--pretrained-from` refers to the checkpoint to use as the initialisation for training.  We strongly recommend using the KITTI pre-trained model to intialise the network before fine-tuning on WildCross.
 
-Here, we take the `vitl` encoder as an example. You can also use `vitb` or `vits` encoders.
+## Evaluation
+To evaluate a given checkpoint, run `eval.py` as follows:
 
-```bash
-# indoor scenes
-python run.py \
-  --encoder vitl \
-  --load-from checkpoints/depth_anything_v2_metric_hypersim_vitl.pth \
-  --max-depth 20 \
-  --img-path <path> --outdir <outdir> [--input-size <size>] [--save-numpy]
-
-# outdoor scenes
-python run.py \
-  --encoder vitl \
-  --load-from checkpoints/depth_anything_v2_metric_vkitti_vitl.pth \
-  --max-depth 80 \
-  --img-path <path> --outdir <outdir> [--input-size <size>] [--save-numpy]
 ```
-
-### Project 2D images to point clouds:
-
-```bash
-python depth_to_pointcloud.py \
-  --encoder vitl \
-  --load-from checkpoints/depth_anything_v2_metric_hypersim_vitl.pth \
-  --max-depth 20 \
-  --img-path <path> --outdir <outdir>
+export PYTHONPATH=$PWD:$PYTHONPATH
+python3 eval.py \
+    --encoder $ENCODER \
+    --checkpoint /path/to/checkpoint.pth \
 ```
-
-### Reproduce training
-
-Please first prepare the [Hypersim](https://github.com/apple/ml-hypersim) and [Virtual KITTI 2](https://europe.naverlabs.com/research/computer-vision/proxy-virtual-worlds-vkitti-2/) datasets. Then:
-
-```bash
-bash dist_train.sh
-```
+Where `--encoder` is the same as used in the training script, and here `--checkpoint` refers to the checkpoint being evaluated.
 
 
-## Citation
-
-If you find this project useful, please consider citing:
-
-```bibtex
-@article{depth_anything_v2,
-  title={Depth Anything V2},
-  author={Yang, Lihe and Kang, Bingyi and Huang, Zilong and Zhao, Zhen and Xu, Xiaogang and Feng, Jiashi and Zhao, Hengshuang},
-  journal={arXiv:2406.09414},
-  year={2024}
-}
-
-@inproceedings{depth_anything_v1,
-  title={Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data}, 
-  author={Yang, Lihe and Kang, Bingyi and Huang, Zilong and Xu, Xiaogang and Feng, Jiashi and Zhao, Hengshuang},
-  booktitle={CVPR},
-  year={2024}
-}
-```
+## Acknowledgements
+We would like again to acknowledge the authors of DepthAnythingV2 and the maintainers of the open source implementation found at [https://github.com/DepthAnything/Depth-Anything-V2](https://github.com/DepthAnything/Depth-Anything-V2), which has formed the basis for the code in this repository.

@@ -30,17 +30,17 @@ import wandb
 parser = argparse.ArgumentParser(description='Depth Anything V2 for Metric Depth Estimation')
 
 parser.add_argument('--encoder', default='vitl', choices=['vits', 'vitb', 'vitl', 'vitg'])
-parser.add_argument('--dataset', default='hypersim', choices=['hypersim', 'vkitti', 'wildcross'])
+parser.add_argument('--dataset', default='wildcross', choices=['hypersim', 'vkitti', 'wildcross'])
 parser.add_argument('--img-size', default=518, type=int)
 parser.add_argument('--min-depth', default=0.001, type=float)
-parser.add_argument('--max-depth', default=20, type=float)
-parser.add_argument('--epochs', default=40, type=int)
-parser.add_argument('--bs', default=2, type=int)
+parser.add_argument('--max-depth', default=60, type=float)
+parser.add_argument('--epochs', default=10, type=int)
+parser.add_argument('--bs', default=4, type=int)
 parser.add_argument('--lr', default=0.000005, type=float)
 parser.add_argument('--pretrained-from', type=str)
 parser.add_argument('--save-path', type=str, required=True)
 parser.add_argument('--local-rank', default=0, type=int)
-parser.add_argument('--port', default=None, type=int)
+parser.add_argument('--port', default=20596, type=int)
 parser.add_argument('--debug', action='store_true', default=False)
 
 

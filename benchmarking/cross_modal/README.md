@@ -68,4 +68,4 @@ Where:
 - `--ckpt` is for setting the path to the checkpoint to be evaluated 
 
 ## Acknowledgements
-We would like again to acknowledge the authors of the original LIP-Loc paper and the maintainers of the open source repository hosted at `https://github.com/Shubodh/lidar-image-pretrain-VPR` which is used as the basis for the code in this repository
+We would like again to acknowledge the authors of the original LIP-Loc paper and the maintainers of the open source repository hosted at [https://github.com/Shubodh/lidar-image-pretrain-VPR](https://github.com/Shubodh/lidar-image-pretrain-VPR) which is used as the basis for the code in this repository
