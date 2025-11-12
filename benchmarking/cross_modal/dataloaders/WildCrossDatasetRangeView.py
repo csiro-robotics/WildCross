@@ -40,8 +40,8 @@ class WildVPRRangeDatasetConstruct:
     def run(self):
         info = {}
         for seq in self.sequences:
-            df_submaps = pd.read_csv(os.path.join(self.data_path, seq, 'submap_poses_aligned.csv'))
-            df_images = pd.read_csv(os.path.join(self.data_path, seq, 'camera_poses_aligned.csv'))
+            df_submaps = pd.read_csv(os.path.join(self.data_path, seq, 'submap_poses.csv'))
+            df_images = pd.read_csv(os.path.join(self.data_path, seq, 'camera_poses.csv'))
             
             if 'K' in seq:
                 df_submaps['x'] += 10000

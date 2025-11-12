@@ -71,7 +71,7 @@ class WildCrossInfoConstructor:
         positions = []
         unit_vectors = []
         for seq in tqdm(sequences, desc = "Reading Sequences"):
-            df = pd.read_csv(os.path.join(self.dataset_path, seq, 'camera_poses_aligned.csv'),
+            df = pd.read_csv(os.path.join(self.dataset_path, seq, 'camera_poses.csv'),
                              dtype = {'%time': str, 'x': np.float64, 'y': np.float64, 'z': np.float64,
                                       'qx': np.float64, 'qy': np.float64, 'qz': np.float64, 'qw': np.float64})
             
