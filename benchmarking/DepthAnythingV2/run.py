@@ -64,6 +64,9 @@ if __name__ == '__main__':
     
     for k, filename in enumerate(filenames):
         print(f'Progress {k+1}/{len(filenames)}: {filename}')
+        if not filename.endswith(".png") and not filename.endswith(".jpg"):
+            print("not an image!")
+            continue
         
         raw_image = cv2.imread(filename)
         
