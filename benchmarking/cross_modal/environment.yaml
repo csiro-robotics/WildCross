@@ -356,5 +356,3 @@ dependencies:
     - tyro==0.9.31
     - wandb==0.21.0
     - yarl==1.20.1
-
-prefix: "/scratch3/kni101/miniforge3/envs/LipLoc"

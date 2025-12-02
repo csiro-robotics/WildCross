@@ -53,7 +53,7 @@ def get_seq_feats_coords(model, CFG, seq, mode, debug=False):
     # Get poses 
     if mode == 'image':
         xyz = pd.read_csv(os.path.join(
-            CFG.data_path, seq, 'camera_poses_aligned.csv'))[['x','y','z']]
+            CFG.data_path, seq, 'camera_poses.csv'))[['x','y','z']]
         print(len(xyz))
         xyz = xyz.to_numpy()[900:][::5]
         print(len(xyz))
@@ -63,7 +63,7 @@ def get_seq_feats_coords(model, CFG, seq, mode, debug=False):
         
     elif mode == 'lidar':
         xyz = pd.read_csv(os.path.join(
-            CFG.data_path, seq, 'submap_poses_aligned.csv'))[['x','y','z']]
+            CFG.data_path, seq, 'submap_poses.csv'))[['x','y','z']]
         xyz = xyz.to_numpy()
     
     if debug:

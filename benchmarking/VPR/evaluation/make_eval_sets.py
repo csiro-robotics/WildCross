@@ -14,7 +14,7 @@ class MakeEvalsets:
         image_paths = sorted(glob(os.path.join(self.root_folder, sequence, 'images_shrunk', '*.png')))
         
         # Get coords 
-        df = pd.read_csv(os.path.join(self.root_folder, sequence, 'camera_poses_aligned.csv'))
+        df = pd.read_csv(os.path.join(self.root_folder, sequence, 'camera_poses.csv'))
         coords = df[['x','y','z']].to_numpy()
         
         return image_paths[::5], coords[::5]        
