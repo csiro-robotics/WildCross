@@ -1,5 +1,5 @@
 # Setting up very basic environment with cuda 11.8 support.
-ARG BASE_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+ARG BASE_IMAGE=nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04
 FROM $BASE_IMAGE
 
 # Add mamba functionality
@@ -18,16 +18,13 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 SHELL ["/bin/bash", "-i", "-c"]
 RUN mamba shell init --shell bash --root-prefix=${CONDA_DIR} 
 
-# Define mamba environments using environment.yamls
-RUN mkdir /workspace
-COPY benchmarking/ /workspace/
-RUN mamba env create -f /workspace/VPR/environment.yaml && \
-    mamba env create -f /workspace/DepthAnythingV2/environment.yaml && \
-    mamba env create -f /workspace/cross_modal/environment.yaml
-
 # Make all conda environments available to all users (not just root). 
-# Also set up relevant folders for RunAI data mounting and operation
+# Also set up relevant folders for data mounting and operation
 RUN mkdir -p /datasets/work && mkdir /workspace && chmod -R a+rw /workspace /datasets && \ 
     chmod -R g+rw ${CONDA_DIR} && \
     chgrp -R root ${CONDA_DIR} && \
     echo "eval \"\$(mamba shell hook --shell bash)\"" >> /etc/bash.bashrc
+
+# Copy data into workspace
+# NOTE conda environments need to be built with access to GPU. Images built with this file should have "unbuilt" tag
+COPY benchmarking/ /workspace/
