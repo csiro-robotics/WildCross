@@ -14,6 +14,33 @@ We provide an environment file to set up the necessary python environment for tr
 mamba install -f environment.yaml
 ```
 
+### Docker
+We provide a dockerfile that will enable building the base docker image that can be used to install any of the benchmarking environments (`cross_modal`, `DepthAnythingV2`, and `VPR`).
+
+The environments themselves need gpus to compile and so we recommend the following process:
+
+1. Build the base docker image
+```
+docker build -t wildcross:unbuilt -f docker/Dockerfile .
+```
+2. Begin an interactive container with access to GPUs
+```
+docker run -it --rm --gpus all --name wildcross wildcross:unbuilt
+```
+3. Within interactive container, build conda envrionments
+```
+mamba env create -f /workspace/VPR/environment.yaml -y && \
+mamba env create -f /workspace/DepthAnythingV2/environment.yaml -y && \
+mamba env create -f /workspace/cross_modal/environment.yaml -y && \
+mamba clean --all
+```
+4. Keeping the interactive container window open, in a fresh terminal, save the built image
+```
+docker container commit wildcross wildcross:latest
+```
+
+With final docker container, you can activate environments and run scripts for each of the benchmarking scenarios.
+
 ### Checkpoints 
 We provide download links for both the KITTI pre-trained and WildCross fine-tuned checkpoints for each network backbone:
 
