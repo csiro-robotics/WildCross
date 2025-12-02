@@ -11,7 +11,7 @@ To download the **WildCross** Dataset, follow the instructions in the root direc
 We provide an environment file to set up the necessary python environment for training and evaluation using **mamba**.  The environment can be installed by running the following command out of this directory:
 
 ```
-mamba install -f environment.yaml
+mamba env create -f environment.yaml
 ```
 
 ### Checkpoints 
