@@ -32,7 +32,7 @@ docker run -it --rm --gpus all --name wildcross wildcross:unbuilt
 mamba env create -f /workspace/VPR/environment.yaml -y && \
 mamba env create -f /workspace/DepthAnythingV2/environment.yaml -y && \
 mamba env create -f /workspace/cross_modal/environment.yaml -y && \
-mamba clean --all
+mamba clean --all -y
 ```
 4. Keeping the interactive container window open, in a fresh terminal, save the built image
 ```
