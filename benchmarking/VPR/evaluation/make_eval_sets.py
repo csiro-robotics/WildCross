@@ -47,7 +47,9 @@ class MakeEvalsets:
             
         venman_eval_info_filepath = os.path.join(os.path.dirname(__file__), 'pickles', 'venman_eval_info.pickle')
         karawatha_eval_info_filepath = os.path.join(os.path.dirname(__file__), 'pickles', 'karawatha_eval_info.pickle')
-            
+        
+        os.makedirs(os.path.join(os.path.dirname(__file__), 'pickles'), exist_ok=True)
+
         with open(venman_eval_info_filepath, 'wb') as f:
             pickle.dump(info_venman, f)
         with open(karawatha_eval_info_filepath, 'wb') as f:
