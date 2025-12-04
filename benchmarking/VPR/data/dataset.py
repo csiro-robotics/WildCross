@@ -138,6 +138,7 @@ class WildCrossDataset:
         if os.path.exists(info_pickle_path):
             info = pickle.load(open(info_pickle_path, 'rb'))
         else:
+            os.makedirs(os.path.dirname(info_pickle_path), exist_ok=True)
             info = WildCrossInfoConstructor(
                 self.data_root, self.img_per_place,
                 pos_include_radius=self.pos_include_radius,
