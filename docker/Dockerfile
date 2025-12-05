@@ -20,7 +20,7 @@ RUN mamba shell init --shell bash --root-prefix=${CONDA_DIR}
 
 # Make all conda environments available to all users (not just root). 
 # Also set up relevant folders for data mounting and operation
-RUN mkdir -p /datasets/work && mkdir /workspace && chmod -R a+rw /workspace /datasets && \ 
+RUN mkdir -p /mnt && mkdir /workspace && chmod -R a+rw /workspace /mnt && \ 
     chmod -R g+rw ${CONDA_DIR} && \
     chgrp -R root ${CONDA_DIR} && \
     echo "eval \"\$(mamba shell hook --shell bash)\"" >> /etc/bash.bashrc
