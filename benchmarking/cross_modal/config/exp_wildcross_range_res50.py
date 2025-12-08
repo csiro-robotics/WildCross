@@ -2,7 +2,7 @@ import torch
 from pathlib import Path
 
 class CFG:
-    data_path = "/datasets/work/d61-csirorobotics2/source/WildVPR"
+    data_path = ''
     debug = False
     batch_size = 64
     num_workers = 32

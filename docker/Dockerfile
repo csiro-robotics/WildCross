@@ -1,4 +1,5 @@
-# Setting up very basic environment with cuda 11.8 support.
+# NOTE conda environments need to be built with access to GPU. Images built with this file should have "unbuilt" tag
+# Setting up very basic environment with cuda 12.6 support.
 ARG BASE_IMAGE=nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04
 FROM $BASE_IMAGE
 
@@ -26,5 +27,15 @@ RUN mkdir -p /mnt && mkdir /workspace && chmod -R a+rw /workspace /mnt && \
     echo "eval \"\$(mamba shell hook --shell bash)\"" >> /etc/bash.bashrc
 
 # Copy data into workspace
-# NOTE conda environments need to be built with access to GPU. Images built with this file should have "unbuilt" tag
 COPY benchmarking/ /workspace/
+
+# Update config files to point to default mount location (see example zero_shot)
+RUN sed -i "s/wildcross_path: ''/wildcross_path: '\/mnt\/WildCross\/'/" /workspace/VPR/configs/BoQ.yaml && \
+    sed -i "s/wildcross_path: ''/wildcross_path: '\/mnt\/WildCross\/'/" /workspace/VPR/configs/MixVPR.yaml && \
+    sed -i "s/wildcross_path: ''/wildcross_path: '\/mnt\/WildCross\/'/" /workspace/VPR/configs/NetVLAD.yaml && \
+    sed -i "s/wildcross_path: ''/wildcross_path: '\/mnt\/WildCross\/'/" /workspace/VPR/configs/SALAD.yaml && \
+    sed -i "s/wildcross_root = ''/wildcross_root = '\/mnt\/WildCross\/'/" /workspace/DepthAnythingV2/train.py && \
+    sed -i "s/wildcross_root = ''/wildcross_root = '\/mnt\/WildCross\/'/" /workspace/DepthAnythingV2/eval.py && \
+    sed -i "s/data_path = ''/data_path = '\/mnt\/WildCross\/'/" /workspace/cross_modal/config/exp_wildcross_range_dinov2.py && \
+    sed -i "s/data_path = ''/data_path = '\/mnt\/WildCross\/'/" /workspace/cross_modal/config/exp_wildcross_range_dinov3.py && \
+    sed -i "s/data_path = ''/data_path = '\/mnt\/WildCross\/'/" /workspace/cross_modal/config/exp_wildcross_range_res50.py
