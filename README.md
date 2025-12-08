@@ -36,6 +36,35 @@ We provide code for training and evaluation on the **WildCross** dataset for the
 ### Checkpoints
 We provide checkpoints for the fine-tuned models used to produce the results in this publication, as well as the urban pre-trained models provided by the original authors for each of the benchmarked methods where applicable.  See the sub-folder for each benchmarked task to find the respective download links to the relevant checkpoints for that task.
 
+### Running with Docker
+We provide a pre-built docker container capable of being used for any of the benchmarking scenarios [here]().
+
+We also provide a dockerfile that will enable building the base docker image that can be used to install any of the benchmarking environments (`cross_modal`, `DepthAnythingV2`, and `VPR`).
+
+The environments themselves need gpus to compile and so we recommend the following process:
+
+1. Build the base docker image
+```
+docker build -t wildcross:unbuilt -f docker/Dockerfile .
+```
+2. Begin an interactive container with access to GPUs
+```
+docker run -it --rm --gpus all --name wildcross wildcross:unbuilt
+```
+3. Within interactive container, build conda envrionments
+```
+mamba env create -f /workspace/VPR/environment.yaml -y && \
+mamba env create -f /workspace/DepthAnythingV2/environment.yaml -y && \
+mamba env create -f /workspace/cross_modal/environment.yaml -y && \
+mamba clean --all -y
+```
+4. Keeping the interactive container window open, in a fresh terminal, save the built image
+```
+docker container commit wildcross wildcross:latest
+```
+
+With final docker container, you can activate environments and run scripts for each of the benchmarking scenarios. See `docker/example_zero_shot_BoQ_intra_eval.sh` for an example on how to run a script using a docker container.
+
 ## Acknowledgements
 We are grateful to the authors and open source maintainers for NetVlad, [MixVPR](https://github.com/amaralibey/MixVPR), [SALAD](https://github.com/serizba/salad), [BOQ](https://github.com/amaralibey/Bag-of-Queries), [LIP-Loc](https://github.com/Shubodh/lidar-image-pretrain-VPR) and [DepthAnythingV2](https://github.com/DepthAnything/Depth-Anything-V2), whose implementations form the basis of the training and evaluation code presented in this repository.  We would also like to thank the author of the [VPR-methods-evaluation](https://github.com/gmberton/VPR-methods-evaluation) repository, which provided an excellent starting point for the development of the evaluation scripts in this repository.  
 
