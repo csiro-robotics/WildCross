@@ -20,7 +20,7 @@ This repository contains supporting scripts for downloading, training and evalua
 
 ## News
 
-- **20XX-XX-XX:** Paper, project page, code, models, demo, and benchmark are all released.
+- **DECEMBER 2025:** Paper, project page, code, models, demo, and benchmark are all released.
 
 ## Download Instructions
 Our dataset can be downloaded through the [**CSIRO Data Access Portal**]('/link/to/portal/when/up').  Detailed instructions for downloading the dataset can be found in the README file provided on the data access portal page.
