@@ -3,17 +3,21 @@ import numpy.typing as npt
 import PIL.Image as Image 
 import cv2 
 
-def load_submap(submap_path: str) -> npt.NDArray[np.float32]:
+def load_submap(submap_path: str, intensity=False) -> npt.NDArray[np.float32]:
     '''
     Loads a given submap from the disk
     Inputs:
     - submap_path: String containing location of the submap on disk
+    - drop_intensity: Boolean which when false drops the intensity channel and only returns XYZ co-ordinates of the points
     Outputs:
-    - submap: numpy array of dimension [N x 4], where N is the number of points and the four channels represent
+    - submap: numpy array of dimension [N x 3/4], where N is the number of points and the four channels represent
               the X, Y, Z coordinates and LiDAR intensity of each points
+    
     '''
     submap = np.fromfile(submap_path, dtype=np.float32)
     submap = submap.reshape(-1,4)
+    if intensity == False:
+        submap = submap[:,:3]
     return submap 
 
 def load_depth_image(depth_path: str) -> npt.NDArray[np.uint16]:
