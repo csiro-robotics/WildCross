@@ -7,6 +7,7 @@ import os
 import torch
 
 from depth_anything_v2.dpt import DepthAnythingV2
+from collections import OrderedDict
 
 
 if __name__ == '__main__':
@@ -36,7 +37,16 @@ if __name__ == '__main__':
     }
     
     depth_anything = DepthAnythingV2(**{**model_configs[args.encoder], 'max_depth': args.max_depth})
-    depth_anything.load_state_dict(torch.load(args.load_from, map_location='cpu'))
+    state_dict = torch.load(args.load_from, map_location='cpu')
+
+    # Handle standard output from fine-tuning the model with model key and module. prefix
+    if "model" in state_dict:
+        state_dict = state_dict["model"]
+        state_dict = OrderedDict([(key.replace("module.", ""), val) 
+                                  if "module" in key else (key, val) 
+                                  for key, val in state_dict.items()])
+
+    depth_anything.load_state_dict(state_dict)
     depth_anything = depth_anything.to(DEVICE).eval()
     
     if os.path.isfile(args.img_path):
@@ -54,6 +64,9 @@ if __name__ == '__main__':
     
     for k, filename in enumerate(filenames):
         print(f'Progress {k+1}/{len(filenames)}: {filename}')
+        if not filename.endswith(".png") and not filename.endswith(".jpg"):
+            print("not an image!")
+            continue
         
         raw_image = cv2.imread(filename)
         

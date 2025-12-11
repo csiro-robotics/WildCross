@@ -14,12 +14,12 @@ cudnn.benchmark = True
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--encoder', type=str, required=True)
-    parser.add_argument('--checkpoint', type=str, required=True)
-    parser.add_argument('--img_size', default=518, type=int)
-    parser.add_argument('--max_depth', type=float, default=60.0)
-    parser.add_argument('--max_depth_gt', type=float, default=60.0)
-    parser.add_argument('--debug', action='store_true', default=False)
+    parser.add_argument('--encoder', type=str, required=True, help="type of vit encoder used for DAv2 model (e.g. vits)")
+    parser.add_argument('--checkpoint', type=str, required=True, help="full path to checkpoint of model weights to be evaluated")
+    parser.add_argument('--img_size', default=518, type=int, help="size of image to be sent through DAv2 model")
+    parser.add_argument('--max_depth', type=float, default=60.0, help="max_depth of the trained DAv2 model (e.g. 80.0 for kitti-trained and 60.0 for wildcross-trained)")
+    parser.add_argument('--max_depth_gt', type=float, default=60.0, help="max depth of the dataset being evaluated (60.0 for wildcross)")
+    parser.add_argument('--debug', action='store_true', default=False, help="optional flag for extra debug outputs")
     args = parser.parse_args()
     
     size = (args.img_size, args.img_size)

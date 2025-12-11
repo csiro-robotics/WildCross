@@ -14,11 +14,13 @@ This subfolder contains scripts for training and evaluation the task of Visual P
 ### Dataset 
 To download the **WildCross** Dataset, follow the instructions in the root directory of this repository.  By default this repository will use the pre-shrunk images (*i.e.* images in the `images_shrunk` folder) to optimise the speed at which the raw data is loaded from the disk, but this can be changed by editing `./data/dataset.py`.
 
+Once the dataset is downloaded, please edit the `wildcross_path` parameter in the config file used for training (found in the `configs` folder) to point towards the **WildCross** root directory. 
+
 ### Environment
 We provide an environment file to set up the necessary python environment for training and evaluation using **mamba**.  The environment can be installed by running the following command out of this directory:
 
 ```
-mamba install -f environment.yaml
+mamba env create -f environment.yaml
 ```
 
 ### Checkpoints
