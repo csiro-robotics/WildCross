@@ -14,6 +14,16 @@ We provide an environment file to set up the necessary python environment for tr
 mamba env create -f environment.yaml
 ```
 
+### DINOv3
+To train with DINOv3, at time of publication, you need to clone the official repo and checkpoint path yourself.
+See https://github.com/facebookresearch/dinov3 for details on the repo and the checkpoints.
+Once these are downloaded, you need to define `REPO_DIR` and `CHECKPOINT_PATH` within line 57 and 58 of `benchmarking/cross_modal/models/CLIPModelV1NormWildCross.py`. Current default lines shown below for convenience.
+
+```
+REPO_DIR="/path/to/dinov3"
+CHECKPOINT_PATH="/path/to/dinov3/checkpoints/dinov3_vits16_pretrain_lvd1689m-08c60483.pth"
+```
+
 ### Checkpoints 
 We provide download links for our fine-tuned checkpoints for each network backbone:
 
