@@ -49,7 +49,7 @@ To train a given backbone and split on the WildCross Dataset, run `trainer_wildc
 export PYTHONPATH=$PWD:$PYTHONPATH 
 python train.py \
     --expid $EXPID \
-    --save_dir /path/to/save_dir.py \
+    --save_dir /path/to/save_dir \
     --split_idx $SPLIT_IDX
 ```
 
@@ -68,7 +68,7 @@ To evaluate a given checkpoint, run `evaluate_wildcross/evaluate.py` as follows:
 export PYTHONPATH=$PWD:$PYTHONPATH
 python evaluate_wildcross/evaluate.py \
     --expid $EXPID \
-    --save_dir /path/to/save_dir.py \
+    --save_dir /path/to/save_dir \
     --split_idx $SPLIT_IDX
     --ckpt /path/to/checkpoint.pth \
 ```
