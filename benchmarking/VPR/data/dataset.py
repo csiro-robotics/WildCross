@@ -62,7 +62,9 @@ class WildCrossInfoConstructor:
             sequences = ['V-01', 'V-02', 'V-03', 'V-04']
         elif environment == 'karawatha':
             sequences = ['K-01', 'K-02', 'K-03', 'K-04']
-        sequences.pop(self.split_idx)
+        # NOTE split idx should follow convention of datasets 
+        # (e.g. split_idx 1 refers to K-01 and V-01)
+        sequences.pop(self.split_idx-1)
         print(f"Training Sequences for environment {environment}: {sequences}")
         
         # Get timestamp, positions and unit vectors for all images

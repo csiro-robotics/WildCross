@@ -39,4 +39,4 @@ python intra-sequence-wildcross.py \
     --dataset_root /path/to/wildcross/root
 ```
 
-**Note**: Similarly to VPR, for convenience in this repo the crossfold splits are 0-indexed (i.e. split 0, 1, 2, 3), as opposed to the paper where they are 1-indexed (i.e. split 1, 2, 3, 4).
+**Note**: As in the paper, here we use 1-indexing such that `split_idx 1` means that V-01 and K-01 are held out for evaluation and the rest of the data is used for training.

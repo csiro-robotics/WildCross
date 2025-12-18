@@ -110,7 +110,9 @@ def get_image_lidar_features(model, CFG, environment, query_idx, debug):
         sequences = ['V-01','V-02','V-03','V-04']
     elif environment == 'karawatha':
         sequences = ['K-01','K-02','K-03','K-04']
-    query_sequence = sequences.pop(query_idx)
+    # NOTE query idx should follow convention of datasets 
+    # (e.g. query_idx 1 refers to K-01 and V-01)
+    query_sequence = sequences.pop(query_idx-1)
     query_info = get_seq_feats_coords(model, CFG, query_sequence, mode='image', debug=debug)
     db_info_list = []
     for seq in sequences:

@@ -74,7 +74,9 @@ class Evaluator:
 
     def run(self):
         all_sequences_data = get_descriptors_positions(self.env_data, self.image_size, self.model, self.debug)
-        query_data = all_sequences_data.pop(self.split_idx)
+        # NOTE split idx should follow convention of datasets 
+        # (e.g. split_idx 1 refers to K-01 and V-01)
+        query_data = all_sequences_data.pop(self.split_idx-1)
         df_results = pd.DataFrame(columns = [f"R@{n}" for n in self.recall_values])
         
         for db_data in all_sequences_data:
