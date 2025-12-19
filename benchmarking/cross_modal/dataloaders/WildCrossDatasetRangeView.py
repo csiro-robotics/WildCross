@@ -88,8 +88,8 @@ class CLIPDataset(torch.utils.data.Dataset):
         self.get_info(mode)
         
     def get_info(self, mode):        
-        train_pickle_name = os.path.join(os.path.dirname(__file__), f"wildvpr_range_train_info_qidx_{self.CFG.query_idx}.pickle")
-        val_pickle_name = os.path.join(os.path.dirname(__file__), f"wildvpr_range_val_info_qidx_{self.CFG.query_idx}.pickle")
+        train_pickle_name = os.path.join(os.path.dirname(__file__), f"wildcross_range_train_info_qidx_{self.CFG.query_idx}.pickle")
+        val_pickle_name = os.path.join(os.path.dirname(__file__), f"wildcross_range_val_info_qidx_{self.CFG.query_idx}.pickle")
         if not os.path.exists(train_pickle_name) or not os.path.exists(val_pickle_name):
             sequences_venman = ['V-01','V-02','V-03','V-04']
             sequences_karawatha = ['K-01','K-02','K-03','K-04']
