@@ -77,5 +77,7 @@ Where:
 - `--expid`, `--save_dir` and `--split_idx` are the same as for the training script
 - `--ckpt` is for setting the path to the checkpoint to be evaluated 
 
+**Note** to attain the results shown in the paper (Table VIII), training and testing must be done across all splits and then averaged. There is no script currently for automating this process.
+
 ## Acknowledgements
 We would like again to acknowledge the authors of the original LIP-Loc paper and the maintainers of the open source repository hosted at [https://github.com/Shubodh/lidar-image-pretrain-VPR](https://github.com/Shubodh/lidar-image-pretrain-VPR) which is used as the basis for the code in this repository
