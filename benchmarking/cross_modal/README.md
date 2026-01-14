@@ -61,6 +61,8 @@ Where:
 - `--save_dir` is for the directory which the training logs and checkpoints will be saved to
 - `--split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: In this codebase, the crossfold dataset splits are 0-indexed (*e.g.* split 0, 1, 2, 3) unlike the paper and links above that are 1-indexed - keep this in mind when selecting splits for training and testing.
 
+Final model will be saved in `save_dir` under `latest.pth`
+
 ## Evaluation
 To evaluate a given checkpoint, run `evaluate_wildcross/evaluate.py` as follows:
 
