@@ -29,14 +29,14 @@ We provide download links for our fine-tuned checkpoints for each network backbo
 
 | Backbone | Split | Link |
 |:-|:-|:-:|
-|ResNet50|Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
-|DinoV2|Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
+|ResNet50|Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/resnet50/split_0.pth?download=true)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/resnet50/split_1.pth?download=true)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/resnet50/split_2.pth?download=true)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/resnet50/split_3.pth?download=true)|
+|DinoV2|Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/dinov2/split_0.pth?download=true)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/dinov2/split_1.pth?download=true)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/dinov2/split_2.pth?download=true)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/crossmodal/dinov2/split_3.pth?download=true)|
 |DinoV3|Split 1|[Download]()|
 ||Split 2|[Download]()|
 ||Split 3|[Download]()|
