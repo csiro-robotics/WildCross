@@ -12,7 +12,7 @@ import os
 parser = argparse.ArgumentParser()
 parser.add_argument('--expid', type=str, required=True)
 parser.add_argument('--save_dir', type=str, required=True)
-parser.add_argument('--query_idx', type=int, default=None)
+parser.add_argument('--split_idx', type=int, default=None)
 parser.add_argument('--pretrained', type=str, default=None)
 args = parser.parse_args()
 
@@ -21,7 +21,7 @@ CFG.expdir = args.save_dir
 CFG.best_model_path = os.path.join(args.save_dir, "best.pth")
 CFG.final_model_path = os.path.join(args.save_dir, "final.pth")
 CFG.logdir = os.path.join(args.save_dir, "log")
-CFG.query_idx = args.query_idx
+CFG.split_idx = args.split_idx
 
 
 model = importlib.import_module(f"models.{CFG.model}").Model(CFG)
