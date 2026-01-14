@@ -110,6 +110,8 @@ if __name__ == '__main__':
         df_results = evaluator.run()
         
         if args.save_dir is not None:
+            if not os.path.exists(args.save_dir):
+                os.makedirs(args.save_dir)
             save_path = os.path.join(args.save_dir, f"crossmodal_results_{env}_split_{args.split_idx}.csv")
             df_results.to_csv(save_path)
     
