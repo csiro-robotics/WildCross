@@ -49,28 +49,7 @@ class ImageEncoder(nn.Module):
         super().__init__()
         if model_name == 'Dinov2':
             dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
-            self.model = DinoWrapperV2(dino)
-            
-        elif model_name == 'Dinov3':
-            # Here define REPO_DIR and CHECKPOINT_PATH to your local dinov3 repo and checkpoint paths
-            # See https://github.com/facebookresearch/dinov3 for more details
-            REPO_DIR="/path/to/dinov3"
-            CHECKPOINT_PATH="/path/to/dinov3/checkpoints/dinov3_vits16_pretrain_lvd1689m-08c60483.pth"
-            
-            dino = torch.hub.load(REPO_DIR,
-                                'dinov3_vits16',
-                                source='local',
-                                weights=CHECKPOINT_PATH)
-        
-            for blk in dino.blocks:
-                for p in blk.parameters():
-                    p.requires_grad = False 
-            for blk in dino.blocks[-2:]:
-                for p in blk.parameters():
-                    p.requires_grad = True 
-        
-            self.model = dino
-        
+            self.model = DinoWrapperV2(dino)        
         
         else:
             self.model = timm.create_model(
