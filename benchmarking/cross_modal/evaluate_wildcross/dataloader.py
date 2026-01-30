@@ -105,12 +105,12 @@ def get_seq_feats_coords(model, CFG, seq, mode, debug=False):
         
     
     
-def get_image_lidar_features(model, CFG, environment, query_idx, debug):
+def get_image_lidar_features(model, CFG, environment, split_idx, debug):
     if environment == 'venman':
         sequences = ['V-01','V-02','V-03','V-04']
     elif environment == 'karawatha':
         sequences = ['K-01','K-02','K-03','K-04']
-    query_sequence = sequences.pop(query_idx)
+    query_sequence = sequences.pop(split_idx)
     query_info = get_seq_feats_coords(model, CFG, query_sequence, mode='image', debug=debug)
     db_info_list = []
     for seq in sequences:
