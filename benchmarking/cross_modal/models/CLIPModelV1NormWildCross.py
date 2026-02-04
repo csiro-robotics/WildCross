@@ -16,6 +16,8 @@ class DinoWrapperV2(nn.Module):
 
     def forward(self, x):
         B, _, H, W = x.shape
+        with torch.no_grad():
+            x = self.dino.prepare_tokens_with_masks(x)
         # train all blocks
         for blk in self.dino.blocks:
             x = blk(x)
