@@ -15,7 +15,7 @@ class DinoWrapperV2(nn.Module):
             
         for block in self.dino.blocks[-self.unfreeze_n_blocks:]:
             for p in block.parameters():
-                p.requires_grad = True 
+                p.requires_grad = True
         
     @property
     def patch_size(self):
@@ -49,7 +49,21 @@ class ImageEncoder(nn.Module):
         super().__init__()
         if model_name == 'Dinov2':
             dino = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14')
-            self.model = DinoWrapperV2(dino)        
+            self.model = DinoWrapperV2(dino)
+            
+        elif model_name == 'Dinov3':
+            # Here define REPO_DIR and CHECKPOINT_PATH to your local dinov3 repo and checkpoint paths
+            # See https://github.com/facebookresearch/dinov3 for more details
+            REPO_DIR="/path/to/dinov3"
+            CHECKPOINT_PATH="/path/to/dinov3/checkpoints/dinov3_vits16_pretrain_lvd1689m-08c60483.pth"
+            
+            dino = torch.hub.load(REPO_DIR,
+                                'dinov3_vits16',
+                                source='local',
+                                weights=CHECKPOINT_PATH)
+        
+            self.model = dino
+        
         
         else:
             self.model = timm.create_model(
