@@ -28,26 +28,26 @@ We provide download links for both the author-provided pre-trained checkpoints o
 
 | Method | Split | Link |
 |:-|:-|:-:|
-|NetVlad|Pre-Trained|[Download]()|
-||Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
-|MixVPR|Pre-Trained|[Download]()|
-||Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
-|SALAD|Pre-Trained|[Download]()|
-||Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
-|BoQ|Pre-Trained|[Download]()|
-||Split 1|[Download]()|
-||Split 2|[Download]()|
-||Split 3|[Download]()|
-||Split 4|[Download]()|
+|NetVlad|Pre-Trained|Downloaded by training script|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_0.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_1.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_2.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_3.pth)|
+|MixVPR|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/pretrained.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_0.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_1.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_2.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_3.pth)|
+|SALAD|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/pretrained.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_0.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_1.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_2.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_3.pth)|
+|BoQ|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/pretrained.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_0.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_1.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_2.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_3.pth)|
 
 ## Training
 To train a given method on the WildCross Dataset, run `train.py` as follows:
