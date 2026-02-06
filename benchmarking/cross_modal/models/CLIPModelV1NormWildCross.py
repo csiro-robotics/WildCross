@@ -8,6 +8,14 @@ class DinoWrapperV2(nn.Module):
         super().__init__()
         self.dino = dino 
         self.out_channels = self.dino.embed_dim
+        self.unfreeze_n_blocks = 2 
+        
+        for p in self.dino.parameters():
+            p.requires_grad = False 
+            
+        for block in self.dino.blocks[-self.unfreeze_n_blocks:]:
+            for p in block.parameters():
+                p.requires_grad = True
         
     @property
     def patch_size(self):
@@ -16,10 +24,13 @@ class DinoWrapperV2(nn.Module):
 
     def forward(self, x):
         B, _, H, W = x.shape
+        # No need to compute gradients for frozen layers
         with torch.no_grad():
             x = self.dino.prepare_tokens_with_masks(x)
-        # train all blocks
-        for blk in self.dino.blocks:
+            for blk in self.dino.blocks[ : -self.unfreeze_n_blocks]:
+                x = blk(x)
+        # Last blocks are trained
+        for blk in self.dino.blocks[-self.unfreeze_n_blocks : ]:
             x = blk(x)
 
         # Get class token
