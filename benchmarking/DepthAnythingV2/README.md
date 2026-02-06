@@ -19,12 +19,12 @@ We provide download links for both the KITTI pre-trained and WildCross fine-tune
 
 | Backbone | Checkpoint | Link |
 |:-|:-|:-:|
-|ViT-s|Pre-trained|[Download]()|
-||Fine-tuned|[Download]()|
-|ViT-b|Pre-trained|[Download]()|
-||Fine-tuned|[Download]()|
-|ViT-l|Pre-trained|[Download]()|
-||Fine-tuned|[Download]()|
+|ViT-s|Pre-trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/pretrained/vits.pth)|
+||Fine-tuned|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/finetuned/vits.pth)|
+|ViT-b|Pre-trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/pretrained/vitb.pth)|
+||Fine-tuned|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/finetuned/vitb.pth)|
+|ViT-l|Pre-trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/pretrained/vitl.pth)|
+||Fine-tuned|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/DepthAnythingV2/finetuned/vitl.pth)|
 
 ## Training
 To train on the WildCross dataset, firstly edit the value of the `wildcross_root` variable on line 74 of `train.py` to the directory containing the WildCross dataset on your machine.  Then, you can train the network by running `train.py` as follows:
