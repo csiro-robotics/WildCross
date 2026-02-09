@@ -15,7 +15,7 @@ class DinoWrapperV2(nn.Module):
             
         for block in self.dino.blocks[-self.unfreeze_n_blocks:]:
             for p in block.parameters():
-                p.requires_grad = True 
+                p.requires_grad = True
         
     @property
     def patch_size(self):
@@ -61,13 +61,6 @@ class ImageEncoder(nn.Module):
                                 'dinov3_vits16',
                                 source='local',
                                 weights=CHECKPOINT_PATH)
-        
-            for blk in dino.blocks:
-                for p in blk.parameters():
-                    p.requires_grad = False 
-            for blk in dino.blocks[-2:]:
-                for p in blk.parameters():
-                    p.requires_grad = True 
         
             self.model = dino
         

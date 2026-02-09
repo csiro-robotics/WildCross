@@ -42,12 +42,12 @@ class Evaluator:
         db_faiss_index = faiss.IndexFlatL2(db_feats.shape[1])
         db_faiss_index.add(db_feats)
         
-        valid_query_idx, positive_idx = self.get_positives(q_coords, db_coords)
+        valid_split_idx, positive_idx = self.get_positives(q_coords, db_coords)
         
-        print(f"{q_name}->{db_name}: {len(q_coords) - len(valid_query_idx)} removed due to no valid positives")
+        print(f"{q_name}->{db_name}: {len(q_coords) - len(valid_split_idx)} removed due to no valid positives")
         
-        q_feats = torch.index_select(q_feats, 0, valid_query_idx)
-        q_coords = torch.index_select(q_coords, 0, valid_query_idx)
+        q_feats = torch.index_select(q_feats, 0, valid_split_idx)
+        q_coords = torch.index_select(q_coords, 0, valid_split_idx)
         
         _, predictions = db_faiss_index.search(q_feats, max(self.recall_values))
         
@@ -56,7 +56,7 @@ class Evaluator:
         # Get recalls 
         recalls = np.zeros(len(self.recall_values))
         for q_idx, preds in enumerate(tqdm(predictions, desc = f"{q_name}->{db_name}")):
-            vis_recall_info[valid_query_idx[q_idx]] = [
+            vis_recall_info[valid_split_idx[q_idx]] = [
                 preds[0].item(), preds[0].item() in positive_idx[q_idx]
             ]    
             
@@ -110,6 +110,9 @@ if __name__ == '__main__':
         df_results = evaluator.run()
         
         if args.save_dir is not None:
+            if not os.path.exists(args.save_dir):
+                print(f"Save Directory did not exist. Creating {args.save_dir}")
+                os.makedirs(args.save_dir)
             save_path = os.path.join(args.save_dir, f"crossmodal_results_{env}_split_{args.split_idx}.csv")
             df_results.to_csv(save_path)
     

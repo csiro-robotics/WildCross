@@ -12,4 +12,4 @@ export PYTHONPATH="${PYTHONPATH}:${PWD}"
 python trainer_wildcross.py \
     --expid exp_wildcross_range_res50 \
     --save_dir $SAVE_DIR \
-    --query_idx $SPLIT_IDX
+    --split_idx $SPLIT_IDX

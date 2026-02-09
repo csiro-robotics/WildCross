@@ -1,5 +1,4 @@
 import torch
-from pathlib import Path
 
 class CFG:
     data_path = "" #TODO: Set path
