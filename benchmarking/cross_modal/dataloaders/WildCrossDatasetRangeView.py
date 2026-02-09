@@ -93,8 +93,10 @@ class CLIPDataset(torch.utils.data.Dataset):
         if not os.path.exists(train_pickle_name) or not os.path.exists(val_pickle_name):
             sequences_venman = ['V-01','V-02','V-03','V-04']
             sequences_karawatha = ['K-01','K-02','K-03','K-04']
-            val_sequences = [sequences_venman.pop(self.CFG.split_idx)]   
-            sequences_karawatha.pop(self.CFG.split_idx)
+            # NOTE split idx should follow convention of datasets 
+            # (e.g. split_idx 1 refers to K-01 and V-01)
+            val_sequences = [sequences_venman.pop(self.CFG.split_idx-1)]   
+            sequences_karawatha.pop(self.CFG.split_idx-1)
             
             train_sequences = sequences_venman + sequences_karawatha    
             

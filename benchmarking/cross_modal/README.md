@@ -59,7 +59,7 @@ Where:
     - `exp_wildcross_range_dinov2`: Training with DinoV2 
     - `exp_wildcross_range_dinov3`: Training with DinoV3 
 - `--save_dir` is for the directory which the training logs and checkpoints will be saved to
-- `--split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: In this codebase, the crossfold dataset splits are 0-indexed (*e.g.* split 0, 1, 2, 3) unlike the paper and links above that are 1-indexed - keep this in mind when selecting splits for training and testing.
+- `--split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: As in the paper, here we use 1-indexing such that `split_idx 1` means that V-01 and K-01 are held out for evaluation and the rest of the data is used for training.
 
 Final model will be saved in `save_dir` under `latest.pth`
 
