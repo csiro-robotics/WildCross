@@ -71,7 +71,7 @@ def main():
     elif args.dataset == 'vkitti':
         trainset = VKITTI2('dataset/splits/vkitti2/train.txt', 'train', size=size)
     elif args.dataset == 'wildcross':
-        wildcross_root = '/datasets/work/d61-csirorobotics2/source/WildCross_release' # Edit this to wildcross root dir 
+        wildcross_root = '/path/to/WildCross' # Edit this to wildcross root dir 
         trainset = WildCross(wildcross_root, 'train', size=size)
     else:
         raise NotImplementedError

@@ -29,25 +29,25 @@ We provide download links for both the author-provided pre-trained checkpoints o
 | Method | Split | Link |
 |:-|:-|:-:|
 |NetVlad|Pre-Trained|Downloaded by training script|
-||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_0.pth)|
-||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_1.pth)|
-||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_2.pth)|
-||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_3.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_1.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_2.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_3.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/NetVLAD/split_4.pth)|
 |MixVPR|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/pretrained.pth)|
-||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_0.pth)|
-||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_1.pth)|
-||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_2.pth)|
-||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_3.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_1.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_2.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_3.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/MixVPR/split_4.pth)|
 |SALAD|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/pretrained.pth)|
-||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_0.pth)|
-||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_1.pth)|
-||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_2.pth)|
-||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_3.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_1.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_2.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_3.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/SALAD/split_4.pth)|
 |BoQ|Pre-Trained|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/pretrained.pth)|
-||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_0.pth)|
-||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_1.pth)|
-||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_2.pth)|
-||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_3.pth)|
+||Split 1|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_1.pth)|
+||Split 2|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_2.pth)|
+||Split 3|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_3.pth)|
+||Split 4|[Download](https://huggingface.co/CSIRORobotics/WildCross/resolve/main/VPR/BoQ/split_4.pth)|
 
 ## Training
 To train a given method on the WildCross Dataset, run `train.py` as follows:
@@ -57,14 +57,14 @@ python train.py \
     --config /path/to/method/configs.yaml \
     --save_dir /path/to/save/dir \
     --pretrained_ckpt /path/to/checkpoint.pth \
-    split_idx 0
+    split_idx 1
 ```
 
 Where:
 - `--config` is for providing the config file for a given method, which can be found in `./configs`
 - `--savedir` is for providing the directory to save checkpoints and logs in
 - `--pretrained_ckpt` is for providing a path to a pre-trained checkpoint to load before starting training.  For best performance, we recommend using the urban pre-trained checkpoints provided here.
-- `split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: In this codebase, the crossfold dataset splits are 0-indexed (*e.g.* split 0, 1, 2, 3) - keep this in mind when selecting splits for training and testing.
+- `split_idx` is for indicating which of the four crossfold training splits is being trained in this experiment.  **Note**: As in the paper, here we use 1-indexing such that `split_idx 1` means that V-01 and K-01 are held out for evaluation and the rest of the data is used for training.
 
 It is also possible to modify arguments in the config file through the command line by passing the name of the argument and its value as a pair of inputs at the end of the command, (*e.g.* `max_epochs 20` to modify the maximum number of training epochs) 
 
@@ -79,7 +79,7 @@ python evaluation/eval_inter_sequence.py \
     --config /path/to/method/configs.yaml \
     --save_dir /path/to/save/dir \
     --pretrained_ckpt  /path/to/checkpoint.pth \
-    split_idx 0 
+    split_idx 1 
 ```
 
 ```
@@ -88,7 +88,7 @@ python evaluation/eval_intra_sequence.py \
     --config /path/to/method/configs.yaml \
     --save_dir /path/to/save/dir \
     --pretrained_ckpt  /path/to/checkpoint.pth \
-    split_idx 0 
+    split_idx 1 
 ```
 
 ## Acknowledgements

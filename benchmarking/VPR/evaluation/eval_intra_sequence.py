@@ -18,7 +18,9 @@ class Evaluator:
         self.pos_thresh = 25.0 
         self.time_thresh = 600.0
         self.recall_values = list(range(1,26))
-        self.env_data = [env_data[split_idx]]
+        # NOTE split idx should follow convention of datasets 
+        # (e.g. split_idx 1 refers to K-01 and V-01)
+        self.env_data = [env_data[split_idx-1]]
         self.model = model 
         self.image_size = CFG.val_img_size 
         self.debug = debug 

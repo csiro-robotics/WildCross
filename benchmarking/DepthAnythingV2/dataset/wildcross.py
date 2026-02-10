@@ -97,7 +97,7 @@ class WildCross(Dataset):
 if __name__ == '__main__':
     from torch.utils.data import DataLoader
     from tqdm import tqdm 
-    dataset = WildCross('/datasets/work/d61-csirorobotics2/source/WildCross_release', 'eval')
+    dataset = WildCross('path/to/WildCross', 'eval')
     dataset.rgb_filelist = dataset.rgb_filelist[18000:]
     dataset.depth_filelist = dataset.depth_filelist[18000:]
     loader = DataLoader(

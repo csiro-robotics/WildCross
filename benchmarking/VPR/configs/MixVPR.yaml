@@ -1,5 +1,5 @@
 # TRAINING 
-split_idx: 0 # Use 0-indexing for splits: 0 = V/K-01 used as queries, etc.
+split_idx: 1 # Use 1-indexing for splits: 1 = V/K-01 used as queries, etc.
 num_gpus: 1
 seed: 2024 
 
