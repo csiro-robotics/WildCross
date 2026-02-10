@@ -21,6 +21,7 @@ This repository contains supporting scripts for downloading, training and evalua
 ## News
 
 - **FEBRUARY 2026:** Paper, project page, code, models, demo, and benchmark are all released.
+- **JANUARY 2026:** WildCross Paper is accepted to IEEE ICRA 2026. 
 
 ## Download Instructions
 Our dataset can be downloaded through the [**CSIRO Data Access Portal**]('/link/to/portal/when/up').  Detailed instructions for downloading the dataset can be found in the README file provided on the data access portal page.
@@ -40,15 +41,25 @@ We provide checkpoints for the fine-tuned models used to produce the results in 
 We are grateful to the authors and open source maintainers for NetVlad, [MixVPR](https://github.com/amaralibey/MixVPR), [SALAD](https://github.com/serizba/salad), [BOQ](https://github.com/amaralibey/Bag-of-Queries), [LIP-Loc](https://github.com/Shubodh/lidar-image-pretrain-VPR) and [DepthAnythingV2](https://github.com/DepthAnything/Depth-Anything-V2), whose implementations form the basis of the training and evaluation code presented in this repository.  We would also like to thank the author of the [VPR-methods-evaluation](https://github.com/gmberton/VPR-methods-evaluation) repository, which provided an excellent starting point for the development of the evaluation scripts in this repository.  
 
 ## Citation
-If you find this repository useful or use the WildCross dataset in your work, please cite us using the following:
+If you find this repository useful or use the WildCross dataset in your work, please cite the paper using the following:
 ```
-@misc{knights2025wildcross,
+@inproceedings{wildcross2026,
   title={{WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments}},
-  author={Joshua Knights, Joseph Reid, Mark Cox, Kaushik Roy, David Hall, Peyman Moghadam},
-  year={2025},
-  eprint={xxxxxxxxx},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV},
-  url={https://arxiv.org/abs/xxxxxxxxxx},
+  author={Joshua Knights, Joseph Reid, Kaushik Roy, David Hall, Mark Cox, Peyman Moghadam},
+  booktitle={Proceedings-IEEE International Conference on Robotics and Automation},
+  pages={},
+  year={2026}
 }
 ```
+And the original WildPlaces paper:
+
+```
+@inproceedings{knights2023wildplaces,
+  title={{Wild-Places: A Large-Scale Dataset for Lidar Place Recognition in Unstructured Natural Environments},
+  author={Knights, Joshua and Vidanapathirana, Kavisha and Ramezani, Milad and Sridharan, Sridha and Fookes, Clinton and Moghadam, Peyman},
+  booktitle={Proceedings-IEEE International Conference on Robotics and Automation},
+  pages={11322--11328},
+  year={2023}
+}
+```
+
