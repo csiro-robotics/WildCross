@@ -10,7 +10,7 @@
 
 <a href="/link/to/arxiv"><img src='https://img.shields.io/badge/arXiv-WildCross-red' alt='Paper PDF'></a>
 <a href='https://depth-anything-v2.github.io'><img src='https://img.shields.io/badge/Project_Page-WildCross-green' alt='Project Page'></a>
-<a href='https://huggingface.co/spaces/depth-anything/Depth-Anything-V2'><img src='https://img.shields.io/badge/Dataset_Download-WildCross-blue'></a>
+<a href='https://doi.org/10.25919/5fmy-yg37'><img src='https://img.shields.io/badge/Dataset_Download-WildCross-blue'></a>
 </div>
 
 This repository contains supporting scripts for downloading, training and evaluating techniques on  **WildCross**, a large-scale multi-modal benchmark for place recognition and metric depth estimation in natural environments accepted at IEEE ICRA2026.
