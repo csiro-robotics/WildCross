@@ -21,6 +21,7 @@
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
@@ -51,7 +52,7 @@
             WildPlaces
           </a>
           <a class="navbar-item" href="https://csiro-robotics.github.io/WildScenes/">
-            WildScences
+            WildScenes
           </a>
         </div>
       </div>
@@ -158,6 +159,9 @@
             traversals and long-term appearance changes. The benchmark includes cross-fold train/test splits for robust evaluation of
             generalization and in-domain adaptation.
           </p>
+        </div>
+        <div class="content has-text-centered">
+          <div id="vpr-results-chart" style="width: 100%; height: 420px;"></div>
         </div>
 
         <h3 class="title is-4">Cross-Modal Place Recognition (CMPR)</h3>
