@@ -1,7 +1,7 @@
 <div align="center">
 <h1>WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments</h1>
 
-[**Joshua Knights**](https://scholar.google.com/citations?user=RxbGr2EAAAAJ&hl=en)<sup>1,2</sup> · **Joseph Reid**<sup>1</sup> [**Kaushik Roy**](https://bit0123.github.io/)<sup>1</sup> · [**David Hall**](https://scholar.google.com/citations?user=dosODoQAAAAJ&hl=en)<sup>1</sup> · [**Mark Cox**](https://scholar.google.com/citations?user=Bk3UD4EAAAAJ&hl=en)<sup>1</sup> · [**Peyman Moghadam**](https://scholar.google.com.au/citations?user=QAVcuWUAAAAJ&hl=en)<sup>1,2</sup>
+[**Joshua Knights**](https://scholar.google.com/citations?user=RxbGr2EAAAAJ&hl=en)<sup>1,2</sup> , **Joseph Reid**<sup>1</sup> , [**Kaushik Roy**](https://bit0123.github.io/)<sup>1</sup> , [**David Hall**](https://scholar.google.com/citations?user=dosODoQAAAAJ&hl=en)<sup>1</sup> , [**Mark Cox**](https://scholar.google.com/citations?user=Bk3UD4EAAAAJ&hl=en)<sup>1</sup> , [**Peyman Moghadam**](https://scholar.google.com.au/citations?user=QAVcuWUAAAAJ&hl=en)<sup>1,2</sup>
 
 <sup>1</sup>DATA61, CSIRO&emsp;&emsp;&emsp;<sup>2</sup>Queensland University of Technology
 <br>
