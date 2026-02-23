@@ -190,16 +190,30 @@
     </div>
 
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-full-width">
         <h2 class="title is-3">Video and Multimedia</h2>
-        <div class="content has-text-justified">
-          <p>
-            This video shows the RGB images from one of the sequences of WildCross alongside semi-dense depth images.
-          </p>
+        <div class="columns">
+          <div class="column">
+            <div class="content has-text-justified">
+              <p>
+                This video shows the RGB images from one of the sequences of WildCross alongside semi-dense depth images.
+              </p>
+            </div>
+            <video autoplay controls muted loop playsinline width="100%" style="aspect-ratio: 16 / 9; object-fit: cover;">
+              <source src="./static/videos/wildcross-sequence.m4v" type="video/mp4">
+            </video>
+          </div>
+          <div class="column">
+            <div class="content has-text-justified">
+              <p>
+                This video shows the RGB images from one of the sequences of WildCross with fine-tuned depth predictions
+              </p>
+            </div>
+            <video autoplay controls muted loop playsinline width="100%" style="aspect-ratio: 16 / 9; object-fit: cover;">
+              <source src="./static/videos/wildcross-depth-pred.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/wildcross-sequence.m4v" type="video/mp4">
-        </video>
       </div>
     </div>
 
