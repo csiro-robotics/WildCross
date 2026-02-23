@@ -13,7 +13,7 @@
 
 This repository contains supporting scripts for downloading, training and evaluating techniques on  **WildCross**, a large-scale multi-modal benchmark for place recognition and metric depth estimation in natural environments accepted at IEEE ICRA2026.
 
-![teaser](media/teaser.png)
+![teaser](static/images/wildcross-teaser.png)
 
 
 ## News
