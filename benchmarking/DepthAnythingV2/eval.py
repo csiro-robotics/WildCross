@@ -23,7 +23,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     size = (args.img_size, args.img_size)
-    wildcross_root = '/datasets/work/d61-csirorobotics2/source/WildCross_release'
+    wildcross_root = ''
     valset = WildCross(wildcross_root, "eval", size=size)
     valloader = DataLoader(valset, batch_size=1, pin_memory=True, num_workers=16, drop_last=True, shuffle=False)
     
