@@ -6,7 +6,7 @@
 <sup>1</sup>CSIRO Robotics&emsp;&emsp;&emsp;<sup>2</sup>Queensland University of Technology
 <br>
 
-<a href="/link/to/arxiv"><img src='https://img.shields.io/badge/arXiv-WildCross-red' alt='Paper PDF'></a>
+<a href="https://arxiv.org/abs/2603.01475"><img src='https://img.shields.io/badge/arXiv-WildCross-red' alt='Paper PDF'></a>
 <a href='https://csiro-robotics.github.io/WildCross'><img src='https://img.shields.io/badge/Project_Page-WildCross-green' alt='Project Page'></a>
 <a href='https://doi.org/10.25919/5fmy-yg37'><img src='https://img.shields.io/badge/Dataset_Download-WildCross-blue'></a>
 </div>
